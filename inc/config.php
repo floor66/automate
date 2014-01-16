@@ -9,6 +9,9 @@
 	
 	/* MySQLi Configuratie */
 	$db = new mysqli("localhost", "root", "", "automate");
+	if($db->connect_errno > 0) {
+		die("Couldn't connect to the database: [". $db->connect_error() ."]");
+	}
 	
 	/* Overige configuratie */
 	session_start();
