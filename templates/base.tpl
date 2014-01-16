@@ -9,12 +9,15 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 		{block name="more_css"}{/block}
+		<script src="js/jquery-2.0.3.min.js"></script>
 	</head>
 	<body>
+		{if $nav}
+			{include file="nav.tpl"}
+		{/if}
 		<div class="container">
 			{block name="container"}{/block}
 		</div>
-		<script src="js/jquery-2.0.3.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>

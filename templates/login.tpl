@@ -8,7 +8,7 @@
 
 {block name="container"}
 <div class="jumbotron">
-	<h1><img src="img/logo-performance.png" /> Performance&trade; Auto-Mate</h1>
+	<h1><img src="img/logo-performance.png" alt="Performance Autogarage" title="Performance Autogarage" /> Performance&trade; Auto-Mate</h1>
 	<form class="form-signin" role="form">
 		<h2 class="form-signin-heading">
 			<span class="glyphicon glyphicon-user"></span> Log alstublieft in
