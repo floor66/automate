@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -82,9 +82,9 @@
 					</ul>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" alt="Uitloggen"><i class="fa fa-lg fa-power-off" style="color: #c0392b;"></i></a></li>
-			</ul>
+			<div class="pull-right">
+				<a class="btn btn-sm btn-danger navbar-btn" href="#"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
+			</div>
 		</div>
 	</div>
 </div>
