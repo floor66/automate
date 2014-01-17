@@ -15,8 +15,11 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-list"></i> Werkorder <b class="caret"></b></a>
 					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-folder-open"></i> Openen</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
@@ -25,13 +28,13 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-calendar"></i> Afspraken <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
-						<li><a href="#"><i class="fa fa-home"></i> Vandaag</a></li>
-						<li><a href="#">Deze week</a></li>
-						<li><a href="#">Deze maand</a></li>
-						<li><a href="#">Anders</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-home"></i> Vandaag</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-ellipsis-h"></i> Deze week</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-ellipsis-h"></i> Deze maand</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-clock-o"></i> Anders</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
@@ -40,7 +43,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Klant <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
@@ -48,8 +51,11 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-euro"></i> Factuur <b class="caret"></b></a>
 					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
@@ -63,7 +69,7 @@
 						<li><a href="#">Overig</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -71,7 +77,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> Gebruikers <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Acties</li>
-						<li><a href="#"><i class="fa fa-fw fa-plus"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>

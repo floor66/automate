@@ -8,6 +8,6 @@
 
 {block name="container"}
 <div class="jumbotron">
-	<h1>Overzicht</h1>
+	<h1><i class="fa fa-bar-chart-o"></i> Overzicht</h1>
 </div>
 {/block}
