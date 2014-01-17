@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<title>{block name="page_title"}{/block}</title>
+		<link rel="shortcut icon" href="img/favicon.ico" />
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/base.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

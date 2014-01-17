@@ -11,7 +11,7 @@
 	<h1><img src="img/logo-performance.png" alt="Performance Autogarage" title="Performance Autogarage" /> Performance&trade; Auto-Mate</h1>
 	<form class="form-signin" role="form">
 		<h2 class="form-signin-heading">
-			Log alstublieft in <span class="glyphicon glyphicon-user pull-right"></span> 
+			Log alstublieft in <i class="fa fa-user pull-right"></i> 
 		</h2>
 		<input type="text" class="form-control" placeholder="Gebruikersnaam" required autofocus>
 		<input type="password" class="form-control" placeholder="Wachtwoord" required>
