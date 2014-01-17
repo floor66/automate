@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{block name="page_title"}{/block}</title>
+		<title>Performance | {block name="page_title"}{/block}</title>
 		<link rel="shortcut icon" href="img/favicon.ico" />
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
