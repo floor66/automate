@@ -11,9 +11,9 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#"><i class="fa fa-bar-chart-o"></i> Overzicht</a></li>
+				<li class="active"><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Overzicht</a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-list"></i> Werkorder <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-list"></i> Werkorder <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
@@ -25,7 +25,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-calendar"></i> Afspraken <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-calendar"></i> Afspraken <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#"><i class="fa fa-fw fa-home"></i> Vandaag</a></li>
@@ -40,7 +40,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Klant <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> Klant <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
@@ -49,7 +49,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-euro"></i> Factuur <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-euro"></i> Factuur <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
@@ -61,7 +61,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i> Inventaris <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i> Inventaris <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#">Onderdelen</a></li>
@@ -74,7 +74,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> Gebruikers <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> Gebruikers <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
