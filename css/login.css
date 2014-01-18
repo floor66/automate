@@ -18,3 +18,8 @@
 .form-signin button {
 	margin-top: 10px;
 }
+
+.alert {
+	width: 50%;
+	margin: 0 auto;
+}
