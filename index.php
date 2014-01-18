@@ -9,5 +9,5 @@
 		$smarty->display("overzicht.tpl");
 	}*/
 		$smarty->assign("nav", true);
-		$smarty->display("overzicht.tpl");
+		$smarty->display("dashboard.tpl");
 ?>

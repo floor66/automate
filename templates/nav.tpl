@@ -11,7 +11,7 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Overzicht</a></li>
+				<li class="active"><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Dashboard</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-list"></i> Werkorder <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -20,7 +20,7 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-folder-open"></i> Openen</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -42,6 +42,9 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> Klant <b class="caret"></b></a>
 					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
@@ -70,14 +73,31 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> Gebruikers <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-briefcase"></i> Leverancier <b class="caret"></b></a>
 					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> Instellingen <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Gebruikers</li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Logboeken</li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
