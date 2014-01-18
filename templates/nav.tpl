@@ -1,5 +1,8 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
+		<div class="pull-right">
+			<a class="btn btn-sm btn-danger navbar-btn" href="#"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
+		</div>
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
@@ -17,6 +20,7 @@
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
@@ -52,10 +56,23 @@
 					</ul>
 				</li>
 				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-truck"></i> Auto <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Acties</li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-euro"></i> Factuur <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="#"><i class="fa fa-fw fa-tasks"></i> Openstaand</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
@@ -67,13 +84,11 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i> Inventaris <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
-						<li><a href="#">Onderdelen</a></li>
-						<li><a href="#">Auto's</a></li>
-						<li><a href="#">Overig</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-search"></i> Product zoeken</a></li>
 						<li><a href="#"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -102,9 +117,6 @@
 					</ul>
 				</li>
 			</ul>
-			<div class="pull-right">
-				<a class="btn btn-sm btn-danger navbar-btn" href="#"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
-			</div>
 		</div>
 	</div>
 </div>
