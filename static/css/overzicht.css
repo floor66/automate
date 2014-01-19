@@ -1,4 +1,4 @@
-.panel {
+#prnt {
 	overflow-x: scroll;
 }
 
@@ -6,11 +6,11 @@
 	cursor: pointer;
 }
 
+#overzicht th {
+	background: #F5F5F5;
+}
+
 #resultaten {
 	min-width: 250px;
 	width: 250px;
-}
-
-#overzicht th {
-	background: #F5F5F5;
 }

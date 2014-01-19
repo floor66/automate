@@ -21,18 +21,20 @@
 				</span>
 			</div>
 		</div>
-		<table class="table table-bordered table-hover tablesorter" id="overzicht">
-			<thead>
-				{foreach $data_arr.0 as $key => $var}<th>{$key}</th>{/foreach}
-			</thead>
-			<tbody>
-			{foreach $data_arr as $data}
-				<tr>
-					{foreach $data as $key => $var}<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}>{$var}</td>{/foreach}
-				</tr>
-			{/foreach}
-			</tbody>
-		</table>
+		<div id="prnt">
+			<table class="table table-bordered table-hover tablesorter" id="overzicht">
+				<thead>
+					{foreach $data_arr.0 as $key => $var}<th>{$key}</th>{/foreach}
+				</thead>
+				<tbody>
+				{foreach $data_arr as $data}
+					<tr>
+						{foreach $data as $key => $var}<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}>{$var}</td>{/foreach}
+					</tr>
+				{/foreach}
+				</tbody>
+			</table>
+		</div>
 	</div>
 	{else}
 	<div class="panel panel-danger">
