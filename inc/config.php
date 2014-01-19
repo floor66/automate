@@ -49,11 +49,13 @@
 		
 		if($_cols[0] != "*") {
 			$cols = implode(", ", tick($_cols));
+		} else {
+			$cols = "*";
 		}
 		$table = tick($_table);
 		$query = "SELECT ". $cols ." FROM ". $table;
 		
-		if(isset($_conditions)) {
+		if(count($_conditions) > 0) {
 			$tmp_arr = array();
 			
 			foreach($_conditions as $key => $var) {
@@ -80,9 +82,8 @@
 							return $row[0][$_cols[0]];
 						}
 					}
-					
-					return $row[0];
 				}
+				
 				return $row;
 			}
 		} catch(PDOException $e) {

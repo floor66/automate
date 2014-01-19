@@ -3,7 +3,7 @@
 {block name="page_title"}Dashboard{/block}
 
 {block name="more_css"}
-<link href="static/css/dashboard.css" rel="stylesheet">
+<link href="/static/css/dashboard.css" rel="stylesheet">
 {/block}
 
 {block name="container"}
