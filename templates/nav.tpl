@@ -1,7 +1,7 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="pull-right">
-			<a class="btn btn-sm btn-danger navbar-btn" href="/automate/logout.php"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
+			<a class="btn btn-sm btn-danger navbar-btn" href="#uitlogmodal" data-toggle="modal"><i class="fa fa-lg fa-power-off"></i></a>
 		</div>
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -117,6 +117,20 @@
 					</ul>
 				</li>
 			</ul>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="uitlogmodal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Weet u zeker dat u uit wilt loggen?</h4>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-lg btn-danger" href="/automate/logout/"><i class="fa fa-lg fa-power-off"></i></a>
+				<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Annuleren</button>
+			</div>
 		</div>
 	</div>
 </div>

@@ -5,3 +5,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([a-z]+)/overzicht/$ overzicht.php?cat=$1
 RewriteRule ^([a-z]+)/overzicht/([0-9]+)/$ overzicht.php?cat=$1&lim=$2
 RewriteRule ^([a-z]+)/beheren/$ beheren.php?cat=$1
+RewriteRule ^logout/$ logout.php

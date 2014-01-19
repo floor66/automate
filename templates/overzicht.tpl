@@ -17,7 +17,7 @@
 				<span class="input-group-addon">Laat</span>
 				<input type="text" class="form-control" id="limit" placeholder="{$data_arr|@count}" />
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">resultaten zien</button>
+					<button class="btn btn-primary" type="button">resultaten zien</button>
 				</span>
 			</div>
 		</div>
