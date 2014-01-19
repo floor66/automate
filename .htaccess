@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond $1 !^static/
+
+RewriteRule ^(.*)$ index.php
+#RewriteRule ^overzicht/([a-z]+)/$ overzicht.php?cat=$1
