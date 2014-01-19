@@ -18,7 +18,7 @@
 				{/foreach}
 				<tr>
 				{foreach $data as $key => $var}
-				<td>{$var}</td>
+					<td>{$var}</td>
 				{/foreach}
 				</tr>
 			{/foreach}

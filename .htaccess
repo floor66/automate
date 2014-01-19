@@ -3,3 +3,4 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^([a-z]+)/overzicht/$ overzicht.php?cat=$1
+RewriteRule ^([a-z]+)/beheren/$ beheren.php?cat=$1
