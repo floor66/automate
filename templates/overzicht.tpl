@@ -1,6 +1,6 @@
 {extends file="base.tpl"}
 
-{block name="page_title"}Overizcht{/block}
+{block name="page_title"}Overzicht{/block}
 
 {block name="more_css"}
 <link href="/static/css/overzicht.css" rel="stylesheet">
@@ -8,8 +8,8 @@
 
 {block name="container"}
 <div class="row">
-	<div class="panel panel-default">
 	{if $data_arr}
+	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
 		<table class="table table-bordered">
 			{foreach $data_arr as $data}
@@ -23,7 +23,14 @@
 				</tr>
 			{/foreach}
 		</table>
-	{/if}
 	</div>
+	{else}
+	<div class="panel panel-danger">
+		<div class="panel-heading"><h3><i class="fa fa-exclamation-triangle"></i> Geen data gevonden</h3></div>
+		<div class="panel-body">
+			<p>Er zijn geen gegevens in de database gevonden voor <strong>'{$categorie}'</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
+		</div>
+	</div>
+	{/if}
 </div>
 {/block}

@@ -8,7 +8,7 @@
 	}
 	
 	$smarty->assign("categorie", ucfirst($_GET["cat"]));
-	$row = db_get(array("*"), "gebruiker", array(), 15);
+	$row = db_get(array("*"), $_GET["cat"], array(), 15);
 	$smarty->assign("data_arr", $row);
 	$smarty->display("overzicht.tpl");
 ?>

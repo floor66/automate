@@ -3,7 +3,7 @@
 	
 	if(empty($_SESSION["gebruiker"])) {
 		if($_POST) {
-			$gebruiker = db_get(array("wachtwoord", "klant_id"), "gebruiker", array("gebruikersnaam" => $_POST["gebruikersnaam"]));
+			$gebruiker = db_get(array("wachtwoord", "klant_id"), "gebruiker", array("gebruikersnaam" => $_POST["gebruikersnaam"]), 1)[0];
 			
 			if($gebruiker["wachtwoord"] == sha1(sha1($_POST["wachtwoord"]))) {
 				$_SESSION["gebruiker"] = clean($_POST["gebruikersnaam"]);
