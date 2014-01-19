@@ -13,7 +13,7 @@
 				if($wachtwoord == sha1(sha1($_POST["wachtwoord"]))) {
 					$_SESSION["gebruiker"] = $_POST["gebruikersnaam"];
 					$_SESSION["klant_id"] = $klant_id;
-					header("Location: index.php");
+					header("Location: /automate/");
 				} else {
 					$smarty->assign("fout", "Verkeerde gebruikersnaam/wachtwoord!");
 				}
@@ -24,21 +24,14 @@
 		$smarty->display("login.tpl");
 	} else {
 		if(isset($_SESSION["klant_id"])) {
-			$stmt = $db->prepare("SELECT `voornaam` FROM `klant` WHERE `klant_id` = ?");
-			$stmt->bind_param("i", $_SESSION["klant_id"]);
-			
-			if($stmt->execute()) {
-				$stmt->bind_result($voornaam);
-				$stmt->fetch();
-				
-				$smarty->assign("naam", $voornaam);
-			}
+			$voornaam = db_get(array("voornaam"), "klant", array("klant_id" => $_SESSION["klant_id"]), 1);
+			$smarty->assign("naam", $voornaam);
 		} else {
 			$smarty->assign("naam", $_SESSION["gebruiker"]);
 		}
 		
 		$smarty->assign("nav", true);
-		$smarty->assign("vandaag", date("d F Y"));
+		$smarty->assign("vandaag", strftime("%d %B %Y"));
 		
 		$smarty->display("dashboard.tpl");
 	}
