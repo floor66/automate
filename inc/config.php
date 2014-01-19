@@ -93,6 +93,14 @@
 	}
 	
 	/* Overige configuratie */
+	
+	/* function clean($str)
+	 * Maakt input string schoon
+	 */
+	function clean($str) {
+		return htmlentities(strip_tags($str));
+	}
+	
 	setlocale(LC_ALL, "nld_nld");
 	define("GEBRUIKER_NORMAAL", 0);
 	define("GEBRUIKER_BEHEERDER", 1);

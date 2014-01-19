@@ -15,7 +15,7 @@
 		<script src="js/jquery-2.0.3.min.js"></script>
 	</head>
 	<body>
-		{if $nav}
+		{if $smarty.template != "login.tpl"}
 			{include file="nav.tpl"}
 		{/if}
 		<div class="container">
