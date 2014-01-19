@@ -12,19 +12,25 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
 		<div class="panel-body">
-			{$data_arr|@count}
+			<div class="input-group input-group-md" id="resultaten">
+				<span class="input-group-addon">Laat</span>
+				<input type="text" class="form-control" id="limit" placeholder="{$data_arr|@count}" />
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">resultaten zien</button>
+				</span>
+			</div>
 		</div>
-		<table class="table table-bordered table-hover">
-			{foreach $data_arr.0 as $key => $var}
-			<th>{$key}</th>
-			{/foreach}
+		<table class="table table-bordered table-hover tablesorter" id="overzicht">
+			<thead>
+			{foreach $data_arr.0 as $key => $var}<th>{$key}</th>{/foreach}
+			</thead>
+			<tbody>
 			{foreach $data_arr as $data}
 				<tr>
-				{foreach $data as $key => $var}
-					<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}>{$var}</td>
-				{/foreach}
+				{foreach $data as $key => $var}<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}>{$var}</td>{/foreach}
 				</tr>
 			{/foreach}
+			</tbody>
 		</table>
 	</div>
 	{else}
@@ -36,4 +42,17 @@
 	</div>
 	{/if}
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#overzicht").tablesorter({
+			dateFormat: "dd-mm-yyyy"
+		});
+		
+		$("#resultaten").click(function() {
+			if($("#limit").val() > 0) {
+				window.location.href = "/automate/{$smarty.get.cat}/overzicht/"+ $("#limit").val() +"/";
+			}
+		});
+	});
+</script>
 {/block}

@@ -13,6 +13,7 @@
 		<![endif]-->
 		{block name="more_css"}{/block}
 		<script src="/static/js/jquery-2.0.3.min.js"></script>
+		<script src="/static/js/jquery.tablesorter.min.js"></script>
 	</head>
 	<body>
 		{if $smarty.template != "login.tpl"}
