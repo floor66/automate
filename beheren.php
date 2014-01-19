@@ -7,6 +7,23 @@
 		header("Location: /automate/");
 	}
 	
+	if(isset($_POST["opslaan"])) {
+		$weergave = json_decode(file_get_contents("inc/weergave.json"), true);
+		$curr = $weergave[$_GET["cat"]];
+		
+		foreach($curr as $kolom => $status) {
+			$inst[$kolom] = isset($_POST[$kolom]) ? 1 : 0;
+		}
+		$inst[$_GET["cat"] ."_id"] = 1;
+		
+		$weergave[$_GET["cat"]] = $inst;
+		if(file_put_contents("inc/weergave.json", json_encode($weergave))) {
+			$smarty->assign("bericht", array("type" => "gelukt", "text" => "Weergave instellingen succesvol bijgewerkt!"));
+		} else {
+			$smarty->assign("bericht", array("type" => "fout", "text" => "Er is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder."));
+		}
+	}
+	
 	$smarty->assign("categorie", ucfirst($_GET["cat"]));
 	$weergave = json_decode(file_get_contents("inc/weergave.json"), true);
 	

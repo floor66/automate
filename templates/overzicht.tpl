@@ -8,17 +8,17 @@
 
 {block name="container"}
 <div class="row">
-	{if $data_arr}
+	{if isset($data_arr)}
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
-		<table class="table table-bordered">
+		<table class="table table-bordered table-hover">
 			{foreach $data_arr as $data}
 				{foreach $data as $key => $var}
 				<th>{$key}</th>
 				{/foreach}
 				<tr>
 				{foreach $data as $key => $var}
-					<td>{$var}</td>
+					<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}>{$var}</td>
 				{/foreach}
 				</tr>
 			{/foreach}

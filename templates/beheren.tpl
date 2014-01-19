@@ -8,19 +8,26 @@
 
 {block name="container"}
 <div class="row">
-	{if $weergave_instellingen}
+	{if isset($weergave_instellingen)}
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Beheren</small></h2></div>
 		<div class="panel-body">
+			{if isset($bericht)}
+			<div class="alert alert-{if $bericht.type == 'fout'}danger{else}success{/if} alert-dismissable text-center">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{$bericht.text}
+			</div>
+			{/if}
 			Kies hier welke kolummen u wil laten zien in het overzicht voor <strong>{$categorie}</strong>.
 		</div>
-		<table class="table">
-			<th>Kolom</th><th>Weergeven?</th>
-		{foreach $weergave_instellingen as $k => $v}
-			<tr><td>{$k}</td><td><input type="checkbox" name="test" value="{$v}" {if $v == 1}checked{/if} /></td></tr>
-		{/foreach}
-		</table>
-		<button class="btn btn-lg btn-primary btn-block" id="opslaan">Opslaan</button>
+		<form method="post" action="/automate/{$smarty.get.cat}/beheren/">
+			<ul style="list-style-type: none;">
+			{foreach $weergave_instellingen as $k => $v}
+				<li><label><input type="checkbox" name="{$k}" value="{$v}"{if $v == 1} checked{/if}{if $k == "{$smarty.get.cat}_id"} disabled{/if} /> <strong>{$k}</strong></label></li>
+			{/foreach}
+			</ul>
+			<input type="submit" name="opslaan" class="btn btn-lg btn-primary btn-block" id="opslaan" value="Opslaan" />
+		</form>
 	</div>
 	{else}
 	<div class="panel panel-danger">

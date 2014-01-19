@@ -8,7 +8,37 @@
 	}
 	
 	$smarty->assign("categorie", ucfirst($_GET["cat"]));
-	$row = db_get(array("*"), $_GET["cat"], array(), 15);
-	$smarty->assign("data_arr", $row);
+	
+	$weergave = json_decode(file_get_contents("inc/weergave.json"), true)[$_GET["cat"]];
+	$kolommen = array();
+	
+	foreach($weergave as $k => $v) {
+		if($v == 1) {
+			$kolommen[] = $k;
+		}
+	}
+	
+	$row = db_get($kolommen, $_GET["cat"], array(), 15);
+	
+	$treated_rows = array();
+	if(count($row) > 0) {
+		$i = 0;
+		foreach($row as $res) {
+			foreach($res as $key => $val) {
+				if($key == $_GET["cat"] ."_id") {
+					$key = "#";
+				}
+				if(strstr($key, "datum")) {
+					$val = strftime("%d %B %Y", $val);
+				}
+				$nkey = ucfirst(str_replace("_", " ", $key));
+				
+				$treated_rows[$i][$nkey] = $val;
+			}
+			$i++;
+		}
+		
+		$smarty->assign("data_arr", $treated_rows);
+	}
 	$smarty->display("overzicht.tpl");
 ?>
