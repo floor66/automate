@@ -1,7 +1,7 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="pull-right">
-			<a class="btn btn-sm btn-danger navbar-btn" href="#"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
+			<a class="btn btn-sm btn-danger navbar-btn" href="/automate/logout.php"><i class="fa fa-lg fa-power-off" style="color: #FFFFFF;"></i></a>
 		</div>
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
