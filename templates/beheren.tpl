@@ -10,7 +10,7 @@
 <div class="row">
 	{if isset($weergave_instellingen)}
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Beheren</small></h2></div>
+		<div class="panel-heading"><h2><i class="fa fa-wrench"></i> {$categorie} <small>Beheren</small></h2></div>
 		<div class="panel-body">
 			{if isset($bericht)}
 			<div class="alert alert-{if $bericht.type == 'fout'}danger{else}success{/if} alert-dismissable text-center">

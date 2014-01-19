@@ -9,7 +9,7 @@
 	
 	$smarty->assign("categorie", ucfirst($_GET["cat"]));
 	
-	$weergave = json_decode(file_get_contents("inc/weergave.json"), true)[$_GET["cat"]];
+	$weergave = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$_GET["cat"]];
 	$kolommen = array();
 	
 	foreach($weergave as $k => $v) {

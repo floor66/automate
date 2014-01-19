@@ -105,5 +105,6 @@
 	setlocale(LC_ALL, "nld_nld");
 	define("GEBRUIKER_NORMAAL", 0);
 	define("GEBRUIKER_BEHEERDER", 1);
+	define("BESTAND_WEERGAVE_INSTELLINGEN", "inc/weergave.json");
 	session_start();
 ?>
