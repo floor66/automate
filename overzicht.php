@@ -11,39 +11,32 @@
 	
 	$_GET["lim"] = (isset($_GET["lim"]) && is_numeric($_GET["lim"])) ? (int)$_GET["lim"] : 15;
 	
-	$weergave = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$_GET["cat"]];
+	$weergave_inst = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$_GET["cat"]];
 	$kolommen = array();
 	
-	foreach($weergave as $k => $v) {
+	foreach($weergave_inst as $k => $v) {
 		if($v == 1) {
 			$kolommen[] = $k;
 		}
 	}
 	
-	$data = db_get($kolommen, $_GET["cat"], array(), $_GET["lim"]);
-	$treated_rows = array();
+	$_GET["sort"] = isset($_GET["sort"]) ? (in_array($_GET["sort"], $kolommen) ? $_GET["sort"] : $kolommen[0]) : $kolommen[0];
+	$_GET["dir"] = isset($_GET["dir"]) ? ($_GET["dir"] == "ASC" ? "ASC" : "DESC") : "ASC";
+
+	$data = db_get($kolommen, $_GET["cat"], array(), $_GET["lim"], array($_GET["sort"], $_GET["dir"]));
 	
 	if(count($data) > 0) {
-		$i = 0;
-		foreach($data as $res) {
-			foreach($res as $key => $val) {
-				if($key == $_GET["cat"] ."_id") {
-					$key = "#";
-				}
-				
-				if(strstr($key, "datum")) {
-					$val = strftime("%d-%m-%Y", $val);
-				}
-				
-				$nkey = ucfirst(str_replace("_", " ", $key));
-				$treated_rows[$i][$nkey] = $val;
-			}
-			
-			$i++;
+		$presenteerbare_titels = array();
+		
+		foreach($kolommen as $kolom) {
+			$presenteerbare_titels[] = ucfirst(str_replace("_", " ", $kolom));
 		}
 		
-		$smarty->assign("data_arr", $treated_rows);
+		$smarty->assign("readable_sort", ucfirst(str_replace("_", " ", $_GET["sort"])));
+		$smarty->assign("ruwe_titels", $kolommen);
+		$smarty->assign("presenteerbare_titels", $presenteerbare_titels);
+		$smarty->assign("data_arr", $data);
 	}
-	
+
 	$smarty->display("overzicht.tpl");
 ?>

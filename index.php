@@ -1,6 +1,6 @@
 <?php
 	require_once("inc/config.php");
-	
+
 	if(empty($_SESSION["gebruiker"])) {
 		if($_POST) {
 			$gebruiker = db_get(array("wachtwoord", "klant_id"), "gebruiker", array("gebruikersnaam" => $_POST["gebruikersnaam"]), 1)[0];

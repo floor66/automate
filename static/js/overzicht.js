@@ -1,15 +1,54 @@
 $(document).ready(function() {
-	$("#overzicht").tablesorter({
-		dateFormat: "dd-mm-yyyy",
-		sortList: [[0, 0]]
+	$.tablesorter.addParser({
+		id: "myDateSort",
+		
+		is: function (s) {
+			return false;
+		},
+		
+		format: function (s, table, cell, cellIndex) {
+			return $(cell).data("date");
+		},
+		
+		type: "numeric"
 	});
 	
-	$("#resultaten").find("button").click(function() {
-		if($("#limit").val() > 0) {
-			var href = window.location.pathname.split("/")[2];
-			window.location.href = "/automate/"+ href +"/overzicht/"+ $("#limit").val() +"/";
-		} else {
-			$("#limit").val("");
+	var headerSet = {};
+	
+	$("#overzicht").find("th").each(function(i) {
+		if($(this).text().toLowerCase().indexOf("datum") > -1) {
+			headerSet[i] = {
+				sorter: "myDateSort"
+			};
 		}
+	});
+	
+	$("#overzicht").tablesorter({
+		headers: headerSet
+	});
+	console.log(headerSet[3]);
+	
+	function getLim() {
+		return $("#limit").val() < 1 ? ($("#limit").attr("placeholder") < 1 ? 15 : $("#limit").attr("placeholder")) : $("#limit").val();
+	}
+	
+	$("#vertoon").click(function() {
+		var cat = window.location.pathname.split("/")[2];
+		var richting = $("#richting").prop("checked") == false ? "DESC" : "ASC";
+		
+		window.location.href = "/automate/"+ cat +"/overzicht/"+ getLim() +"/"+ $(".sorteren-veranderen.active").attr("id") +"/"+ richting +"/";
+	});
+	
+	$(".sorteren-veranderen").click(function(e) {
+		e.preventDefault();
+		
+		$(".sorteren-veranderen").removeClass("active");
+		$(this).addClass("active");
+		
+		$("#selected").children("span").first().text($(this).text());
+	});
+	
+	$("#richting").change(function() {
+		$(this).parent("label").children("span").text($(this).prop("checked") == false ? "Aflopend" : "Oplopend");
 	});
 });

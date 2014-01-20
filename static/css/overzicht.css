@@ -11,6 +11,9 @@
 }
 
 #resultaten {
-	min-width: 250px;
-	width: 250px;
+	width: 50%;
+}
+
+#limit {
+	min-width: 75px;
 }

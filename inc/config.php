@@ -40,7 +40,7 @@
 	 * $_conditions		Onder welke voorwaarden (WHERE)
 	 * $_limit			Met welke limit (LIMIT)
 	 */
-	function db_get($_cols, $_table, $_conditions, $_limit) {
+	function db_get($_cols, $_table, $_conditions, $_limit, $_order_by = array()) {
 		global $pdo;
 		
 		if(empty($_cols) || empty($_table)) {
@@ -64,6 +64,10 @@
 			
 			$conditions = implode(", ", $tmp_arr);
 			$query .= " WHERE ". $conditions;
+		}
+		
+		if(count($_order_by) > 0) {
+			$query .= " ORDER BY ". $_order_by[0] ." ". $_order_by[1];
 		}
 		
 		if($_limit > 0) {
