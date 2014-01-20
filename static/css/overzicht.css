@@ -17,3 +17,7 @@
 #limit {
 	min-width: 75px;
 }
+
+#richting {
+	cursor: pointer;
+}

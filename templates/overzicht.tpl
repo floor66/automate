@@ -1,6 +1,6 @@
 {extends file="base.tpl"}
 
-{block name="page_title"}Overzicht{/block}
+{block name="page_title"}{$categorie} | Overzicht{/block}
 
 {block name="more_css"}
 <link href="/static/css/overzicht.css" rel="stylesheet">
@@ -20,8 +20,8 @@
 				<span class="input-group-addon">
 					resultaten
 				</span>
-				<span class="input-group-addon">
-					<label><input type="checkbox" name="richting" id="richting" value="{$smarty.get.dir}"{if $sorteer_richting == "Oplopend"} checked{/if} /> <span>{$sorteer_richting}</span></label>
+				<span class="input-group-addon" id="richting">
+					<i class="fa fa-fw fa-toggle-{if $sorteer_richting == "Oplopend"}up{else}down{/if}" /></i><span>{$sorteer_richting}</span>
 				</span>
 				<span class="input-group-addon">
 					gesorteerd op
