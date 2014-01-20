@@ -32,11 +32,12 @@
 			$presenteerbare_titels[] = ucfirst(str_replace("_", " ", $kolom));
 		}
 		
-		$smarty->assign("readable_sort", ucfirst(str_replace("_", " ", $_GET["sort"])));
-		$smarty->assign("ruwe_titels", $kolommen);
+		$smarty->assign("sorteer_richting", $_GET["dir"] == "ASC" ? "Oplopend" : "Aflopend");
+		$smarty->assign("sorteer_titel", ucfirst(str_replace("_", " ", $_GET["sort"])));
+		$smarty->assign("kolom_titels", $kolommen);
 		$smarty->assign("presenteerbare_titels", $presenteerbare_titels);
-		$smarty->assign("data_arr", $data);
+		$smarty->assign("resultaten", $data);
 	}
-
+	
 	$smarty->display("overzicht.tpl");
 ?>

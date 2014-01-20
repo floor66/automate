@@ -8,7 +8,7 @@
 
 {block name="container"}
 <div class="row">
-	{if isset($data_arr)}
+	{if isset($resultaten)}
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
 		<div class="panel-body">
@@ -16,20 +16,22 @@
 				<span class="input-group-btn">
 					<button class="btn btn-primary" type="button" id="vertoon">Vertoon</button>
 				</span>
-				<input type="text" class="form-control" id="limit" placeholder="{$data_arr|@count}" />
+				<input type="text" class="form-control" id="limit" placeholder="{$resultaten|@count}" />
 				<span class="input-group-addon">
 					resultaten
 				</span>
 				<span class="input-group-addon">
-					<label><input type="checkbox" name="richting" id="richting" value="{$smarty.get.dir}"{if $smarty.get.dir == "ASC"} checked{/if} /> <span>{if $smarty.get.dir == "ASC"}Oplopend{else}Aflopend{/if}</span></label>
+					<label><input type="checkbox" name="richting" id="richting" value="{$smarty.get.dir}"{if $sorteer_richting == "Oplopend"} checked{/if} /> <span>{$sorteer_richting}</span></label>
 				</span>
 				<span class="input-group-addon">
 					gesorteerd op
 				</span>
 				<div class="input-group-btn">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="selected"><span>{$readable_sort}</span> <span class="caret"></span></button>
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="selected"><span>{$sorteer_titel}</span> <span class="caret"></span></button>
 					<ul class="dropdown-menu">
-						{foreach $presenteerbare_titels as $key}<li class="sorteren-veranderen{if $key == $readable_sort} active{/if}" id="{$ruwe_titels.{$key@index}}"><a href="#">{$key}</a></li>{/foreach}
+					{foreach $presenteerbare_titels as $titel}
+						<li class="sorteren-veranderen{if $titel == $sorteer_titel} active{/if}" id="{$kolom_titels.{$titel@index}}"><a href="#">{$titel}</a></li>
+					{/foreach}
 					</ul>
 				</div>
 			</div>
@@ -38,12 +40,16 @@
 		<div id="prnt">
 			<table class="table table-bordered table-hover tablesorter" id="overzicht">
 				<thead>
-					{foreach $presenteerbare_titels as $key}<th>{$key}</th>{/foreach}
+				{foreach $presenteerbare_titels as $titel}
+					<th>{$titel}</th>
+				{/foreach}
 				</thead>
 				<tbody>
-				{foreach $data_arr as $data}
+				{foreach $resultaten as $resultaat}
 					<tr>
-						{foreach $data as $key => $var}<td{if $key == "#"} id="{$smarty.get.cat}_{$var}"{/if}{if strstr($key, "datum")} data-date="{$var}"{/if}>{if strstr($key, "datum")}{$var|date_format:"%d-%m-%Y"}{else}{$var}{/if}</td>{/foreach}
+					{foreach $resultaat as $kolom => $waarde}
+						<td{if $kolom == "#"} id="{$smarty.get.cat}_{$waarde}"{/if}{if strstr($kolom, "datum")} data-date="{$waarde}"{/if}>{if strstr($kolom, "datum")}{$waarde|date_format:"%d-%m-%Y"}{else}{$waarde}{/if}</td>
+					{/foreach}
 					</tr>
 				{/foreach}
 				</tbody>
