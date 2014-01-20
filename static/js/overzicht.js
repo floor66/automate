@@ -26,7 +26,6 @@ $(document).ready(function() {
 	$("#overzicht").tablesorter({
 		headers: headerSet
 	});
-	console.log(headerSet[3]);
 	
 	function getLim() {
 		return $("#limit").val() < 1 ? ($("#limit").attr("placeholder") < 1 ? 15 : $("#limit").attr("placeholder")) : $("#limit").val();
