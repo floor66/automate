@@ -128,8 +128,10 @@
 				<h4 class="modal-title">Weet u zeker dat u uit wilt loggen?</h4>
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-lg btn-danger" href="/automate/logout/"><i class="fa fa-lg fa-power-off"></i></a>
-				<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Annuleren</button>
+				<div class="text-center">
+					<a class="btn btn-danger" href="/automate/logout/" title="Uitloggen"><i class="fa fa-lg fa-power-off"></i></a>
+					<button type="button" class="btn btn-default btn-default" data-dismiss="modal">Terug</button>
+				</div>
 			</div>
 		</div>
 	</div>

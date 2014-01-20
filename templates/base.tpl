@@ -3,6 +3,8 @@
 	<head>
 		<title>Performance | {block name="page_title"}{/block}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="shortcut icon" href="/static/img/favicon.ico" />
 		<link href="/static/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
