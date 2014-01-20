@@ -42,6 +42,7 @@
 		
 		/* Stuur de huidige:
 		 *  - sorteerrichting
+		 *  - css icoon class die bij deze richting hoort
 		 *  - sorteerkolom
 		 *  - voor gebruikers leesbaar gemaakte titel van de geselecteerde sorteerkolom
 		 *  - de array met kolomtitels zoals ze in de database staan
@@ -49,6 +50,7 @@
 		 *  - uit de database gehaalde gegevens
 		 * naar het template */
 		$smarty->assign("sorteer_richting", $_POST["richting"] == "ASC" ? "Oplopend" : "Aflopend");
+		$smarty->assign("sorteer_richting_icoon", $_POST["richting"] == "ASC" ? "fa-toggle-up" : "fa-toggle-down");
 		$smarty->assign("sorteer_kolom_leesbaar", ucfirst(str_replace("_", " ", $_POST["sorteer_kolom"])));
 		$smarty->assign("sorteer_kolom", $_POST["sorteer_kolom"]);
 		$smarty->assign("kolom_titels", $kolommen);
@@ -57,7 +59,7 @@
 	}
 	
 	//Stuur de huidige categorie naar het template
-	$smarty->assign("categorie", ucfirst($_GET["cat"]));
+	$smarty->assign("categorie", $_GET["cat"]);
 	
 	//Laat het overzicht zien
 	$smarty->display("overzicht.tpl");

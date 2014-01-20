@@ -1,4 +1,4 @@
-#prnt {
+#scroll_fix {
 	overflow-x: scroll;
 }
 
@@ -12,6 +12,7 @@
 
 #resultaten {
 	width: 50%;
+	margin: 0 auto;
 }
 
 #limit {

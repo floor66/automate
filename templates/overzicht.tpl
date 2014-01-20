@@ -1,6 +1,6 @@
 {extends file="base.tpl"}
 
-{block name="page_title"}{$categorie} | Overzicht{/block}
+{block name="page_title"}{$categorie|capitalize} | Overzicht{/block}
 
 {block name="more_css"}
 <link href="/static/css/overzicht.css" rel="stylesheet">
@@ -8,22 +8,22 @@
 
 {block name="container"}
 <div class="row">
-	{if isset($resultaten)}
+{if isset($resultaten)}
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
+		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie|capitalize} <small>Overzicht</small></h2></div>
 		<div class="panel-body">
-			<form method="post" action="/automate/{$smarty.get.cat}/overzicht/" id="sorteer_form">
-				<div class="input-group input-group-md" id="resultaten">
+			<form method="post" action="/automate/{$categorie}/overzicht/" id="sorteer_form">
+			<div class="input-group input-group-md" id="resultaten">
 					<span class="input-group-btn">
 						<button class="btn btn-primary" type="button" id="vertoon">Vertoon</button>
 					</span>
 					<input type="text" class="form-control" id="limit" name="limit" placeholder="{$resultaten|@count}" />
 					<span class="input-group-addon">
-						resultaten
+						resultaten per pagina,
 					</span>
 					<span class="input-group-addon" id="richting_toggle">
 						<input type="hidden" name="richting" id="richting" />
-						<i class="fa fa-fw fa-toggle-{if $sorteer_richting == "Oplopend"}up{else}down{/if}" /></i><span>{$sorteer_richting}</span>
+						<i class="fa fa-fw {$sorteer_richting_icoon}" /></i><span>{$sorteer_richting}</span>
 					</span>
 					<span class="input-group-addon">
 						gesorteerd op
@@ -39,9 +39,9 @@
 					</div>
 				</div>
 			</form>
-			<p><br />Klik op een van de kolomtitels om in deze resultaten nog verder te sorteren.</p>
+			<p><br />Klik op een van de kolomtitels om in deze resultaten nog verder door te sorteren.</p>
 		</div>
-		<div id="prnt">
+		<div id="scroll_fix">
 			<table class="table table-bordered table-hover tablesorter" id="overzicht">
 				<thead>
 				{foreach $presenteerbare_kolommen as $kolom}
@@ -60,14 +60,14 @@
 			</table>
 		</div>
 	</div>
-	{else}
+{else}
 	<div class="panel panel-danger">
 		<div class="panel-heading"><h3><i class="fa fa-exclamation-triangle"></i> Geen data gevonden</h3></div>
 		<div class="panel-body">
-			<p>Er zijn geen gegevens in de database gevonden voor <strong>'{$categorie}'</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
+			<p>Er zijn geen gegevens in de database gevonden voor <strong>'{$categorie|capitalize}'</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
 		</div>
 	</div>
-	{/if}
+{/if}
 </div>
 <script type="text/javascript" src="/static/js/overzicht.js"></script>
 {/block}
