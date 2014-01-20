@@ -10,7 +10,7 @@
 	}
 	
 	//Check of er een limiet is opgegeven en of deze geldig is
-	$_GET["lim"] = (isset($_GET["lim"]) && is_numeric($_GET["lim"])) ? (int)$_GET["lim"] : 15;
+	$_POST["limit"] = (isset($_POST["limit"]) && is_numeric($_POST["limit"])) ? (int)$_POST["limit"] : 15;
 	
 	//Haal de weergave instellingen op voor deze categorie
 	$weergave_inst = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$_GET["cat"]];
@@ -24,12 +24,12 @@
 	}
 	
 	/* Check of er een sorteerkolom is opgegeven en of deze geldig is
-	   Check of er een sorteerrichting is opgegeven en of deze geldig is */
-	$_GET["sort"] = isset($_GET["sort"]) ? (in_array($_GET["sort"], $kolommen) ? $_GET["sort"] : $kolommen[0]) : $kolommen[0];
-	$_GET["dir"] = isset($_GET["dir"]) ? ($_GET["dir"] == "op" ? "ASC" : "DESC") : "ASC";
+	 * Check of er een sorteerrichting is opgegeven en of deze geldig is */
+	$_POST["sorteer_kolom"] = isset($_POST["sorteer_kolom"]) ? (in_array($_POST["sorteer_kolom"], $kolommen) ? $_POST["sorteer_kolom"] : $kolommen[0]) : $kolommen[0];
+	$_POST["richting"] = isset($_POST["richting"]) ? ($_POST["richting"] == "op" ? "ASC" : "DESC") : "ASC";
 	
 	//Haal gegevens op uit de database
-	$data = db_get($kolommen, $_GET["cat"], array(), $_GET["lim"], array($_GET["sort"], $_GET["dir"]));
+	$data = db_get($kolommen, $_GET["cat"], array(), $_POST["limit"], array($_POST["sorteer_kolom"], $_POST["richting"]));
 	
 	//Check of er uberhaupt gegevens opgehaald zijn
 	if(count($data) > 0) {
@@ -41,20 +41,23 @@
 		}
 		
 		/* Stuur de huidige:
-		 *  - categorie
 		 *  - sorteerrichting
+		 *  - sorteerkolom
 		 *  - voor gebruikers leesbaar gemaakte titel van de geselecteerde sorteerkolom
 		 *  - de array met kolomtitels zoals ze in de database staan
 		 *  - de array met kolomtitels die voor de gebruiker leesbaar gemaakt zijn
 		 *  - uit de database gehaalde gegevens
-		 */
-		$smarty->assign("categorie", ucfirst($_GET["cat"]));
-		$smarty->assign("sorteer_richting", $_GET["dir"] == "ASC" ? "Oplopend" : "Aflopend");
-		$smarty->assign("sorteer_titel", ucfirst(str_replace("_", " ", $_GET["sort"])));
+		 * naar het template */
+		$smarty->assign("sorteer_richting", $_POST["richting"] == "ASC" ? "Oplopend" : "Aflopend");
+		$smarty->assign("sorteer_kolom_leesbaar", ucfirst(str_replace("_", " ", $_POST["sorteer_kolom"])));
+		$smarty->assign("sorteer_kolom", $_POST["sorteer_kolom"]);
 		$smarty->assign("kolom_titels", $kolommen);
-		$smarty->assign("presenteerbare_titels", $presenteerbare_titels);
+		$smarty->assign("presenteerbare_kolommen", $presenteerbare_titels);
 		$smarty->assign("resultaten", $data);
 	}
+	
+	//Stuur de huidige categorie naar het template
+	$smarty->assign("categorie", ucfirst($_GET["cat"]));
 	
 	//Laat het overzicht zien
 	$smarty->display("overzicht.tpl");

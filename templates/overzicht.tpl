@@ -12,43 +12,47 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$categorie} <small>Overzicht</small></h2></div>
 		<div class="panel-body">
-			<div class="input-group input-group-md" id="resultaten">
-				<span class="input-group-btn">
-					<button class="btn btn-primary" type="button" id="vertoon">Vertoon</button>
-				</span>
-				<input type="text" class="form-control" id="limit" placeholder="{$resultaten|@count}" />
-				<span class="input-group-addon">
-					resultaten
-				</span>
-				<span class="input-group-addon" id="richting">
-					<i class="fa fa-fw fa-toggle-{if $sorteer_richting == "Oplopend"}up{else}down{/if}" /></i><span>{$sorteer_richting}</span>
-				</span>
-				<span class="input-group-addon">
-					gesorteerd op
-				</span>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="selected"><span>{$sorteer_titel}</span> <span class="caret"></span></button>
-					<ul class="dropdown-menu">
-					{foreach $presenteerbare_titels as $titel}
-						<li class="sorteren-veranderen{if $titel == $sorteer_titel} active{/if}" id="{$kolom_titels.{$titel@index}}"><a href="#">{$titel}</a></li>
-					{/foreach}
-					</ul>
+			<form method="post" action="/automate/{$smarty.get.cat}/overzicht/" id="sorteer_form">
+				<div class="input-group input-group-md" id="resultaten">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" id="vertoon">Vertoon</button>
+					</span>
+					<input type="text" class="form-control" id="limit" name="limit" placeholder="{$resultaten|@count}" />
+					<span class="input-group-addon">
+						resultaten
+					</span>
+					<span class="input-group-addon" id="richting_toggle">
+						<input type="hidden" name="richting" id="richting" />
+						<i class="fa fa-fw fa-toggle-{if $sorteer_richting == "Oplopend"}up{else}down{/if}" /></i><span>{$sorteer_richting}</span>
+					</span>
+					<span class="input-group-addon">
+						gesorteerd op
+					</span>
+					<div class="input-group-btn">
+						<input type="hidden" name="sorteer_kolom" id="sorteer_kolom" value="{$sorteer_kolom}" />
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="selected"><span>{$sorteer_kolom_leesbaar}</span> <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						{foreach $presenteerbare_kolommen as $kolom}
+							<li class="sorteren-veranderen{if $kolom == $sorteer_kolom_leesbaar} active{/if}" id="{$kolom_titels.{$kolom@index}}"><a href="#">{$kolom}</a></li>
+						{/foreach}
+						</ul>
+					</div>
 				</div>
-			</div>
+			</form>
 			<p><br />Klik op een van de kolomtitels om in deze resultaten nog verder te sorteren.</p>
 		</div>
 		<div id="prnt">
 			<table class="table table-bordered table-hover tablesorter" id="overzicht">
 				<thead>
-				{foreach $presenteerbare_titels as $titel}
-					<th>{$titel}</th>
+				{foreach $presenteerbare_kolommen as $kolom}
+					<th>{$kolom}</th>
 				{/foreach}
 				</thead>
 				<tbody>
 				{foreach $resultaten as $resultaat}
 					<tr>
 					{foreach $resultaat as $kolom => $waarde}
-						<td{if $kolom == "#"} id="{$smarty.get.cat}_{$waarde}"{/if}{if strstr($kolom, "datum")} data-date="{$waarde}"{/if}>{if strstr($kolom, "datum")}{$waarde|date_format:"%d-%m-%Y"}{else}{$waarde}{/if}</td>
+						<td{if strstr($kolom, "datum")} data-date="{$waarde}"{/if}>{if strstr($kolom, "datum")}{$waarde|date_format:"%d-%m-%Y"}{else}{$waarde}{/if}</td>
 					{/foreach}
 					</tr>
 				{/foreach}

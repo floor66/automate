@@ -34,10 +34,10 @@ $(document).ready(function() {
 	
 	//Redirect naar de juiste url aan de hand van het sorteermenu
 	$("#vertoon").click(function() {
-		var cat = window.location.pathname.split("/")[2];
-		var richting = $("#richting").children("i").hasClass("fa-toggle-down") ? "af" : "op";
+		$("#richting").val($("#richting_toggle").children("i").hasClass("fa-toggle-down") ? "af" : "op");
+		$("#limit").val(getLim());
 		
-		window.location.href = "/automate/"+ cat +"/overzicht/"+ getLim() +"/"+ $(".sorteren-veranderen.active").attr("id") +"/"+ richting +"/";
+		$("#sorteer_form").submit();
 	});
 	
 	//Update voor soort custom <select> element bestaande uit een Bootstrap dropdown
@@ -48,10 +48,11 @@ $(document).ready(function() {
 		$(this).addClass("active");
 		
 		$("#selected").children("span").first().text($(this).text());
+		$("#sorteer_kolom").val($(this).attr("id"));
 	});
 	
 	//Verander text als de sorteerrichting aan/uitgecheckt wordt
-	$("#richting").click(function() {
+	$("#richting_toggle").click(function() {
 		var curr = $(this).children("i").hasClass("fa-toggle-up");
 		$(this).children("i").removeClass("fa-toggle-up fa-toggle-down");
 		
