@@ -21,4 +21,14 @@
 
 #richting_toggle {
 	cursor: pointer;
+	font-weight: bold;
+}
+
+#selected {
+	-webkit-border-top-left-radius: 0px;
+	   -moz-border-top-left-radius: 0px;
+	        border-top-left-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	   -moz-border-bottom-left-radius: 0px;
+	        border-bottom-left-radius: 0px;
 }

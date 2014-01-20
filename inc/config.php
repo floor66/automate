@@ -8,8 +8,9 @@
 	$smarty->setCacheDir("inc/Smarty/cache/");
 	
 	/* PDO Configuratie */
+	define("DATABASE_NAAM", "auto_mate");
 	try {
-		$pdo = new PDO("mysql:host=localhost;dbname=auto_mate", "root", "");
+		$pdo = new PDO("mysql:host=localhost;dbname=". DATABASE_NAAM, "root", "");
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch(PDOException $e) {
 		echo "Error: ". $e->getMessage();
@@ -70,7 +71,9 @@
 			$query .= " ORDER BY ". $_order_by[0] ." ". $_order_by[1];
 		}
 		
-		if($_limit > 0) {
+		if(gettype($_limit) == "array") {
+			$query .= " LIMIT ". $_limit[0] .", ". $_limit[1];
+		} elseif($_limit > 0) {
 			$query .= " LIMIT ". $_limit;
 		}
 		
