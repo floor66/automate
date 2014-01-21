@@ -29,14 +29,14 @@ $(document).ready(function() {
 	
 	//Bepaal de ingevoerde limiet of geef standaardwaarde
 	function getLim() {
-		return $("#limit").val() < 1 ? ($("#limit").attr("placeholder") < 1 ? 15 : $("#limit").attr("placeholder")) : $("#limit").val();
+		return $("#input_limiet").val() < 1 ? ($("#input_limiet").attr("placeholder") < 1 ? 15 : $("#input_limiet").attr("placeholder")) : $("#input_limiet").val();
 	}
 	
 	//Redirect naar de juiste url aan de hand van het sorteermenu
-	$("#vertoon").click(function() {
-		$("#richting").val($("#richting_toggle").children("i").hasClass("fa-sort-amount-desc") ? "af" : "op");
-		$("#limit").val(getLim());
-		$("#pagina").val($("#pagina_input").val() > 0 ? $("#pagina_input").val() : ($("#pagina").val() > 0 ? $("#pagina").val() : 1));
+	$("#button_vertoon").click(function() {
+		$("#input_richting").val($("#richting_toggle").children("i").hasClass("fa-sort-amount-desc") ? "DESC" : "ASC");
+		$("#input_limiet").val(getLim());
+		$("#input_pagina").val($("#dropdown_input_pagina").val() > 0 ? $("#dropdown_input_pagina").val() : ($("#input_pagina").val() > 0 ? $("#input_pagina").val() : 1));
 		
 		$("#sorteer_form").submit();
 	});
@@ -48,8 +48,8 @@ $(document).ready(function() {
 		$(".sorteren-veranderen").removeClass("active");
 		$(this).addClass("active");
 		
-		$("#selected").children("span").first().text($(this).text());
-		$("#sorteer_kolom").val($(this).attr("id"));
+		$("#button_selected").children("span").first().text($(this).text());
+		$("#input_sorteer_kolom").val($(this).attr("id"));
 	});
 	
 	//Verander text als de sorteerrichting aan/uitgecheckt wordt
@@ -61,21 +61,21 @@ $(document).ready(function() {
 		$(this).children("i").addClass(curr ? "fa-sort-amount-desc" : "fa-sort-amount-asc");
 	});
 	
-	$("#pagina_input").parent().click(function(e) {
+	$("#dropdown_input_pagina").parent().click(function(e) {
 		e.preventDefault();
 
-		if(e.target.id == "pagina_input") {
+		if(e.target.id == "dropdown_input_pagina") {
 			e.stopPropagation();
 		}
 	});
 	
-	$("#ga_naar_pagina").parent().click(function() {
-		$("#vertoon").trigger("click");
+	$("#dropdown_pagina_verstuur").parent().click(function() {
+		$("#button_vertoon").trigger("click");
 	});
 	
-	$("#pagina_knoppen").children("button").click(function() {
-		$("#pagina").val($(this).data("pagina"));
+	$("#pagina_buttons").children("button").click(function() {
+		$("#input_pagina").val($(this).data("pagina"));
 		
-		$("#vertoon").trigger("click");
+		$("#button_vertoon").trigger("click");
 	});
 });

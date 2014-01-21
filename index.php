@@ -5,7 +5,16 @@
 	if(empty($_SESSION["gebruiker"])) {
 		//Check of het inlogforumulier verstuurd is
 		if($_POST) {
-			$gebruiker = db_get(array("wachtwoord", "klant_id"), "gebruiker", array("gebruikersnaam" => $_POST["gebruikersnaam"]), 1)[0];
+			$gebruiker = db_get(array(
+				"kolommen" => array(
+					"wachtwoord", "klant_id"
+				),
+				"tabel" => "gebruiker",
+				"voorwaarden" => array(
+					"gebruikersnaam" => $_POST["gebruikersnaam"]
+				),
+				"limiet" => 1
+			))[0];
 			
 			//Check het ingevoerde wachtwoord tegen het wachtwoord in de database
 			if($gebruiker["wachtwoord"] == sha1(sha1($_POST["wachtwoord"]))) {
@@ -24,14 +33,21 @@
 	} else {
 		//Haal enkele gegevens over de ingelogde gebruiker uit de database, indien toepasselijk
 		if(isset($_SESSION["klant_id"])) {
-			$voornaam = db_get(array("voornaam"), "klant", array("klant_id" => $_SESSION["klant_id"]), 1);
-			$smarty->assign("naam", $voornaam);
+			$gebruiker_klant = db_get(array(
+				"kolommen" => array(
+					"voornaam"
+				),
+				"tabel" => "klant",
+				"voorwaarden" => array(
+					"klant_id" => $_SESSION["klant_id"]
+				),
+				"limiet" => 1
+			))[0];
+			
+			$smarty->assign("voornaam", $gebruiker_klant["voornaam"]);
 		} else {
-			$smarty->assign("naam", $_SESSION["gebruiker"]);
+			$smarty->assign("voornaam", $_SESSION["gebruiker"]);
 		}
-		
-		//Stuur de huidige datum naar het template
-		$smarty->assign("vandaag", strftime("%d %B %Y"));
 		
 		//Laat het dashboard zien
 		$smarty->display("dashboard.tpl");

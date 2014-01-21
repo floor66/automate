@@ -15,20 +15,13 @@
 	margin: 0 auto;
 }
 
-#limit {
+#input_limiet {
 	min-width: 75px;
 }
 
 #richting_toggle {
-	cursor: pointer;
-	font-weight: bold;
+	-webkit-border-radius: 0px;
+	   -moz-border-radius: 0px;
+			border-radius: 0px;
 }
 
-#selected {
-	-webkit-border-top-left-radius: 0px;
-	   -moz-border-top-left-radius: 0px;
-	        border-top-left-radius: 0px;
-	-webkit-border-bottom-left-radius: 0px;
-	   -moz-border-bottom-left-radius: 0px;
-	        border-bottom-left-radius: 0px;
-}

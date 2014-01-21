@@ -33,66 +33,63 @@
 		}
 	}
 	
-	/* function db_get($_cols, $_table, $_conditions, $_limit) 
+	/* function db_get($settings) 
 	 * Simpele functie om dyamische prepared SELECT statements te maken
-	 * Parameters:
-	 * $_cols			Welke kolommen op te vragen
-	 * $_table			Uit welke tabel deze te halen
-	 * $_conditions		Onder welke voorwaarden (WHERE)
-	 * $_limit			Met welke limit (LIMIT)
+	 * Parameters ($settings assoc. array):
+	 * "kolommen"		Welke kolommen op te vragen
+	 * "tabel"			Uit welke tabel deze te halen
+	 * "voorwaarden"	Onder welke voorwaarden (WHERE)
+	 * "sorteer_op"		Sorteer (ORDER BY) op deze kolom
+	 * "limiet"			Met welke limit (LIMIT)
 	 */
-	function db_get($_cols, $_table, $_conditions, $_limit, $_order_by = array()) {
+	function db_get($settings) {
 		global $pdo;
 		
-		if(empty($_cols) || empty($_table)) {
+		if(empty($settings["kolommen"]) || empty($settings["tabel"])) {
 			return NULL;
 		}
 		
-		if($_cols[0] != "*") {
-			$cols = implode(", ", tick($_cols));
+		if(gettype($settings["kolommen"]) == "array") {
+			$kolommen = implode(", ", tick($settings["kolommen"]));
 		} else {
-			$cols = "*";
+			$kolommen = "*";
 		}
-		$table = tick($_table);
-		$query = "SELECT ". $cols ." FROM ". $table;
+		$tabel = tick($settings["tabel"]);
+		$query = "SELECT ". $kolommen ." FROM ". $tabel;
 		
-		if(count($_conditions) > 0) {
-			$tmp_arr = array();
+		if(isset($settings["voorwaarden"]) && count($settings["voorwaarden"]) > 0) {
+			$voorwaarden = array();
 			
-			foreach($_conditions as $key => $var) {
-				$tmp_arr[] = tick($key) ." = :". $key;
+			foreach($settings["voorwaarden"] as $kolom => $waarde) {
+				$voorwaarden[] = tick($kolom) ." = :". $kolom;
 			}
 			
-			$conditions = implode(", ", $tmp_arr);
-			$query .= " WHERE ". $conditions;
+			$voorwaarden = implode(", ", $voorwaarden);
+			$query .= " WHERE ". $voorwaarden;
 		}
 		
-		if(count($_order_by) > 0) {
-			$query .= " ORDER BY ". $_order_by[0] ." ". $_order_by[1];
+		if(isset($settings["sorteer_op"])) {
+			$query .= " ORDER BY ". $settings["sorteer_op"]["kolom"] ." ". $settings["sorteer_op"]["richting"];
 		}
 		
-		if(gettype($_limit) == "array") {
-			$query .= " LIMIT ". $_limit[0] .", ". $_limit[1];
-		} elseif($_limit > 0) {
-			$query .= " LIMIT ". $_limit;
+		if(gettype($settings["limiet"]) == "array") {
+			$query .= " LIMIT ". $settings["limiet"]["offset"] .", ". $settings["limiet"]["aantal"];
+		} elseif($settings["limiet"] > 0) {
+			$query .= " LIMIT ". $settings["limiet"];
 		}
 		
 		try {
 			$stmt = $pdo->prepare($query);
-			$stmt->execute($_conditions);
+			
+			if(isset($voorwaarden)) {
+				$stmt->execute($settings["voorwaarden"]);
+			} else {
+				$stmt->execute();
+			}
+			
 			$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
-			if(count($row) > 0) {
-				if(count($row) == 1) {
-					if(count($row[0]) == 1) {
-						if($_cols[0] != "*") {
-							return $row[0][$_cols[0]];
-						}
-					}
-				}
-				
-				return $row;
-			}
+			return count($row) > 0 ? $row : NULL;
 		} catch(PDOException $e) {
 			echo "Error: ". $e->getMessage();
 		}
