@@ -63,7 +63,7 @@
 						</div>
 					</div>
 				</div>
-				{elseif $data.aantal_paginas == 3 && $data.pagina != 3}
+				{elseif $data.aantal_paginas == 3 && $data.pagina != 2}
 				<button type="button" class="btn btn-default" data-pagina="2">2</button>
 				{/if}
 				<button type="button" class="btn btn-default{if $data.pagina == $data.aantal_paginas} active{/if}" data-pagina="{$data.aantal_paginas}">{$data.aantal_paginas}</button>
