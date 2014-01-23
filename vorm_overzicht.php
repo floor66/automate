@@ -42,10 +42,12 @@
 	if($data["actie"] == "zoeken") {
 		$query = "SELECT ". implode(", ", tick($data["kolom_titels"])) ." ".
 		"FROM ". $data["categorie"] ." ".
-		"WHERE ". tick($data["sorteer_kolom"]) ." LIKE :zoekterm";
+		"WHERE ". tick($data["sorteer_kolom"]) ." LIKE :zoekterm ".
+		"ORDER BY :sorteer_kolom ". $data["richting"];
 		
 		$bind = array(
-			"zoekterm" => "%". $data["zoekterm"] ."%"
+			"zoekterm" => "%". $data["zoekterm"] ."%",
+			"sorteer_kolom" => $data["sorteer_kolom"]
 		);
 	} elseif($data["actie"] == "overzicht") {
 		$query = "SELECT ". implode(", ", tick($data["kolom_titels"])) ." ".

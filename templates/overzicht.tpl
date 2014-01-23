@@ -12,7 +12,7 @@
 
 {block name="container"}
 <div class="row">
-{if isset($data.resultaten)}
+{if $data.resultaten|count > 0}
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$data.categorie|capitalize} <small>{$data.subtitel}</small></h2></div>
 		<div class="panel-body">
@@ -104,7 +104,11 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading"><h3><i class="fa fa-exclamation-triangle"></i> Geen data gevonden</h3></div>
 		<div class="panel-body">
-			<p>Er zijn geen gegevens in de database gevonden voor <strong>'{$data.categorie|capitalize}'</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
+			{if $data.actie == "overzicht"}
+			<p>Er zijn geen gegevens in de database gevonden voor <strong>{$data.categorie|capitalize}</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
+			{elseif $data.actie == "zoeken"}
+			<p>Er zijn geen resultaten gevonden in <strong>{$data.categorie|capitalize}</strong> voor <strong>'{$data.sorteer_kolom_leesbaar}'</strong> die <strong>'{$data.zoekterm}'</strong> bevat.</p>
+			{/if}
 		</div>
 	</div>
 {/if}
