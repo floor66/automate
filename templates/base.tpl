@@ -13,7 +13,7 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
-		{block name="more_css"}{/block}
+		{block name="extra_css"}{/block}
 		<script src="/static/js/jquery-2.0.3.min.js"></script>
 		<script src="/static/js/jquery.tablesorter.min.js"></script>
 	</head>
@@ -24,6 +24,7 @@
 		<div class="container">
 			{block name="container"}{/block}
 		</div>
+		{block name="extra_js"}{/block}
 		<script src="/static/js/bootstrap.min.js"></script>
 	</body>
 </html>

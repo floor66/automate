@@ -2,8 +2,12 @@
 
 {block name="page_title"}{$data.categorie|capitalize} | Overzicht{/block}
 
-{block name="more_css"}
+{block name="extra_css"}
 <link href="/static/css/overzicht.css" rel="stylesheet">
+{/block}
+
+{block name="extra_js"}
+<script type="text/javascript" src="/static/js/overzicht.js"></script>
 {/block}
 
 {block name="container"}
@@ -99,5 +103,4 @@
 	</div>
 {/if}
 </div>
-<script type="text/javascript" src="/static/js/overzicht.js"></script>
 {/block}

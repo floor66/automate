@@ -2,7 +2,7 @@
 
 {block name="page_title"}Beheren{/block}
 
-{block name="more_css"}
+{block name="extra_css"}
 <link href="/static/css/beheren.css" rel="stylesheet">
 {/block}
 

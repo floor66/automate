@@ -2,7 +2,7 @@
 
 {block name="page_title"}Inloggen{/block}
 
-{block name="more_css"}
+{block name="extra_css"}
 <link href="/static/css/login.css" rel="stylesheet">
 {/block}
 
