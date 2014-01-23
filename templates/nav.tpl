@@ -1,7 +1,7 @@
 <div class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<div class="pull-right">
-			<a class="btn btn-sm btn-danger navbar-btn" href="#uitlogmodal" data-toggle="modal"><i class="fa fa-lg fa-power-off"></i></a>
+			<a class="btn btn-sm btn-danger navbar-btn" href="#uitlog_modal" data-toggle="modal"><i class="fa fa-lg fa-power-off"></i></a>
 		</div>
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -51,7 +51,7 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/klant/zoeken/" data-toggle="modal"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/klant/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -117,22 +117,6 @@
 					</ul>
 				</li>
 			</ul>
-		</div>
-	</div>
-</div>
-<div class="modal fade" id="uitlogmodal" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Weet u zeker dat u uit wilt loggen?</h4>
-			</div>
-			<div class="modal-footer">
-				<div class="text-center">
-					<a class="btn btn-danger" href="/automate/logout/" title="Uitloggen"><i class="fa fa-lg fa-power-off"></i></a>
-					<button type="button" class="btn btn-default btn-default" data-dismiss="modal">Terug</button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

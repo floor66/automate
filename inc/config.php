@@ -72,10 +72,12 @@
 			$query .= " ORDER BY ". $settings["sorteer_op"]["kolom"] ." ". $settings["sorteer_op"]["richting"];
 		}
 		
-		if(gettype($settings["limiet"]) == "array") {
-			$query .= " LIMIT ". $settings["limiet"]["offset"] .", ". $settings["limiet"]["aantal"];
-		} elseif($settings["limiet"] > 0) {
-			$query .= " LIMIT ". $settings["limiet"];
+		if(isset($settings["limiet"])) {
+			if(gettype($settings["limiet"]) == "array") {
+				$query .= " LIMIT ". $settings["limiet"]["offset"] .", ". $settings["limiet"]["aantal"];
+			} elseif($settings["limiet"] > 0) {
+				$query .= " LIMIT ". $settings["limiet"];
+			}
 		}
 		
 		try {
@@ -104,6 +106,23 @@
 	 */
 	function clean($str) {
 		return htmlentities(strip_tags($str));
+	}
+	
+	function geef_kolommen($categorie, $alleen_actief) {
+		$weergave_inst_bestand = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$categorie];
+		$tmp = array();
+		
+		foreach($weergave_inst_bestand as $kolom => $status) {
+			if($alleen_actief == true) {
+				if($status == 1) {
+					$tmp[] = $kolom;
+				}
+			} else {
+				$tmp[] = $kolom;
+			}
+		}
+		
+		return $tmp;
 	}
 	
 	setlocale(LC_ALL, "nld_nld");

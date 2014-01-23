@@ -20,6 +20,7 @@
 	<body>
 		{if $smarty.template != "login.tpl"}
 			{include file="nav.tpl"}
+			{include file="modals.tpl"}
 		{/if}
 		<div class="container">
 			{block name="container"}{/block}

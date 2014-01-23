@@ -18,7 +18,7 @@
 				{$bericht.text}
 			</div>
 			{/if}
-			Kies hier welke kolummen u wil laten zien in het overzicht voor <strong>{$categorie}</strong>.
+			Kies hier welke kolummen u wil laten zien in het overzicht/de zoekresultaten voor <strong>{$categorie}</strong>.
 		</div>
 		<form method="post" action="/automate/{$smarty.get.cat}/beheren/">
 			<ul style="list-style-type: none;">

@@ -41,17 +41,6 @@ $(document).ready(function() {
 		$("#sorteer_form").submit();
 	});
 	
-	//Update voor soort custom <select> element bestaande uit een Bootstrap dropdown
-	$(".sorteren-veranderen").click(function(e) {
-		e.preventDefault();
-		
-		$(".sorteren-veranderen").removeClass("active");
-		$(this).addClass("active");
-		
-		$("#button_selected").children("span").first().text($(this).text());
-		$("#input_sorteer_kolom").val($(this).attr("id"));
-	});
-	
 	//Verander text als de sorteerrichting aan/uitgecheckt wordt
 	$("#richting_toggle").click(function() {
 		var curr = $(this).children("i").hasClass("fa-sort-amount-asc");

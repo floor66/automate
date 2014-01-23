@@ -1,6 +1,6 @@
 {extends file="base.tpl"}
 
-{block name="page_title"}{$data.categorie|capitalize} | Overzicht{/block}
+{block name="page_title"}{$data.categorie|capitalize} | {$data.subtitel}{/block}
 
 {block name="extra_css"}
 <link href="/static/css/overzicht.css" rel="stylesheet">
@@ -14,9 +14,12 @@
 <div class="row">
 {if isset($data.resultaten)}
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$data.categorie|capitalize} <small>Overzicht</small></h2></div>
+		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$data.categorie|capitalize} <small>{$data.subtitel}</small></h2></div>
 		<div class="panel-body">
-			<form method="post" action="/automate/{$data.categorie}/overzicht/" id="sorteer_form">
+			<form method="post" action="/automate/{$data.categorie}/{$data.actie}/" id="sorteer_form">
+				{if $data.actie == "zoeken"}
+					<input type="hidden" name="zoekterm" id="input_zoekterm" value="{$data.zoekterm}" />
+				{/if}
 				<input type="hidden" name="pagina" id="input_pagina" />
 				<input type="hidden" name="richting" id="input_richting" />
 				<input type="hidden" name="sorteer_kolom" id="input_sorteer_kolom" value="{$data.sorteer_kolom}" />
@@ -34,17 +37,19 @@
 					<span class="input-group-addon">
 						gesorteerd op
 					</span>
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="button_selected"><span>{$data.sorteer_kolom_leesbaar}</span> <span class="caret"></span></button>
+					<span class="input-group-btn mijn-dropdown-select" data-references="input_sorteer_kolom">
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span>{$data.sorteer_kolom_leesbaar}</span> <span class="caret"></span></button>
 						<ul class="dropdown-menu">
 						{foreach $data.presenteerbare_kolommen as $kolom}
-							<li class="sorteren-veranderen{if $kolom == $data.sorteer_kolom_leesbaar} active{/if}" id="{$data.kolom_titels.{$kolom@index}}"><a href="#">{$kolom}</a></li>
+							<li{if $kolom == $data.sorteer_kolom_leesbaar} class="active"{/if} id="{$data.kolom_titels.{$kolom@index}}"><a href="#">{$kolom}</a></li>
 						{/foreach}
 						</ul>
 					</span>
 				</div>
 			</form>
-			<p><br />Klik op een van de kolomtitels om in deze resultaten nog verder door te sorteren.</p>
+			{if $data.actie == "zoeken"}
+			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.sorteer_kolom_leesbaar}</em> die '{$data.zoekterm}' bevat:</h4>
+			{/if}
 			<strong>Pagina: </strong>
 			<div class="btn-group" id="pagina_buttons">
 			{if $data.aantal_paginas > 1}
@@ -74,6 +79,7 @@
 				<button type="button" class="btn btn-default" data-pagina="{$data.pagina + 1}" id="pagina_volgende">&gt;&gt;</button>
 			{/if}
 			</div>
+			<p><em>Klik op een van de kolomtitels om in deze resultaten nog verder door te sorteren.</em></p>
 		</div>
 		<div id="scroll_fix">
 			<table class="table table-bordered table-hover tablesorter" id="overzicht">
