@@ -3,7 +3,7 @@
 {block name="page_title"}Beheren{/block}
 
 {block name="extra_css"}
-<link href="/static/css/beheren.css" rel="stylesheet">
+<link href="{$smarty.const.STATIC_FOLDER}/css/beheren.css" rel="stylesheet">
 {/block}
 
 {block name="container"}

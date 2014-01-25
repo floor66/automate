@@ -3,11 +3,11 @@
 {block name="page_title"}{$data.categorie|capitalize} | {$data.subtitel}{/block}
 
 {block name="extra_css"}
-<link href="/static/css/overzicht.css" rel="stylesheet">
+<link href="{$smarty.const.STATIC_FOLDER}/css/overzicht.css" rel="stylesheet">
 {/block}
 
 {block name="extra_js"}
-<script type="text/javascript" src="/static/js/overzicht.js"></script>
+<script type="text/javascript" src="{$smarty.const.STATIC_FOLDER}/js/overzicht.js"></script>
 {/block}
 
 {block name="container"}

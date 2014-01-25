@@ -3,12 +3,12 @@
 {block name="page_title"}Inloggen{/block}
 
 {block name="extra_css"}
-<link href="/static/css/login.css" rel="stylesheet">
+<link href="{$smarty.const.STATIC_FOLDER}/css/login.css" rel="stylesheet">
 {/block}
 
 {block name="container"}
 <div class="jumbotron">
-	<h1><img src="/static/img/logo-performance.png" alt="Performance Autogarage" title="Performance Autogarage" /> Performance&trade; Auto-Mate</h1>
+	<h1><img src="{$smarty.const.STATIC_FOLDER}/img/logo-performance.png" alt="Performance Autogarage" title="Performance Autogarage" /> Performance&trade; Auto-Mate</h1>
 	{if isset($fout)}
 	<div class="alert alert-danger alert-dismissable text-center">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

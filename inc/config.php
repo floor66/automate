@@ -129,5 +129,6 @@
 	define("GEBRUIKER_NORMAAL", 0);
 	define("GEBRUIKER_BEHEERDER", 1);
 	define("BESTAND_WEERGAVE_INSTELLINGEN", "inc/weergave.json");
+	define("STATIC_FOLDER", "/automate/static");
 	session_start();
 ?>

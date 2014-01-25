@@ -120,4 +120,4 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/static/js/nav.js"></script>
+<script type="text/javascript" src="{$smarty.const.STATIC_FOLDER}/js/nav.js"></script>

@@ -45,4 +45,4 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/static/js/modals.js"></script>
+<script type="text/javascript" src="{$smarty.const.STATIC_FOLDER}/js/modals.js"></script>
