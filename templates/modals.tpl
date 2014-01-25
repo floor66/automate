@@ -24,17 +24,15 @@
 			<div class="modal-body">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<form method="post" action="/automate/" id="zoek_form">
+					<input type="hidden" name="zoek_kolom" id="input_zoek_kolom" />
 					<input type="hidden" name="sorteer_kolom" id="input_sorteer_kolom" />
 					<p>Kies hier op welke kolom en met welke zoekterm u wilt zoeken.</p>
 					<div class="input-group input-group-md">
-						<span class="input-group-btn mijn-dropdown-select" data-references="input_sorteer_kolom">
+						<span class="input-group-btn mijn-dropdown-select" data-references="input_zoek_kolom">
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span>Zoeken op...</span> <span class="caret"></span></button>
-							<ul class="dropdown-menu">
-								<li id="klant_id"><a href="#">Klant Id</a></li>
-								<li id="voornaam"><a href="#">Voornaam</a></li>
-							</ul>
+							<ul class="dropdown-menu"></ul>
 						</span>
-						<input type="text" class="form-control" name="zoekterm" id="input_zoekterm" placeholder="Vul uw zoekterm in" required />
+						<input type="text" class="form-control" name="zoek_term" id="input_zoek_term" placeholder="Vul uw zoekterm in" required />
 					</div>
 				</form>
 			</div>

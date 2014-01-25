@@ -18,7 +18,8 @@
 		<div class="panel-body">
 			<form method="post" action="/automate/{$data.categorie}/{$data.actie}/" id="sorteer_form">
 				{if $data.actie == "zoeken"}
-					<input type="hidden" name="zoekterm" id="input_zoekterm" value="{$data.zoekterm}" />
+					<input type="hidden" name="zoek_term" id="input_zoek_term" value="{$data.zoek_term}" />
+					<input type="hidden" name="zoek_kolom" id="input_zoek_kolom" value="{$data.zoek_kolom}" />
 				{/if}
 				<input type="hidden" name="pagina" id="input_pagina" />
 				<input type="hidden" name="richting" id="input_richting" />
@@ -48,7 +49,7 @@
 				</div>
 			</form>
 			{if $data.actie == "zoeken"}
-			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.sorteer_kolom_leesbaar}</em> die '{$data.zoekterm}' bevat:</h4>
+			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.zoek_kolom_leesbaar}</em> met '{$data.zoek_term}':</h4>
 			{/if}
 			<strong>Pagina: </strong>
 			<div class="btn-group" id="pagina_buttons">
@@ -104,11 +105,11 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading"><h3><i class="fa fa-exclamation-triangle"></i> Geen data gevonden</h3></div>
 		<div class="panel-body">
-			{if $data.actie == "overzicht"}
+		{if $data.actie == "overzicht"}
 			<p>Er zijn geen gegevens in de database gevonden voor <strong>{$data.categorie|capitalize}</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
-			{elseif $data.actie == "zoeken"}
-			<p>Er zijn geen resultaten gevonden in <strong>{$data.categorie|capitalize}</strong> voor <strong>'{$data.sorteer_kolom_leesbaar}'</strong> die <strong>'{$data.zoekterm}'</strong> bevat.</p>
-			{/if}
+		{elseif $data.actie == "zoeken"}
+			<p>Er zijn geen resultaten gevonden in <strong>{$data.categorie|capitalize}</strong> voor <strong>'{$data.zoek_kolom_leesbaar}'</strong> die <strong>'{$data.zoek_term}'</strong> bevat.</p>
+		{/if}
 		</div>
 	</div>
 {/if}

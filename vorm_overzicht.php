@@ -21,9 +21,9 @@
 		header("Location: /automate/". $_GET["cat"] ."/overzicht/");
 	}
 	
-	$data["subtitel"] = "Zoekresultaten"; //twijfelgeval refactor
+	$data["subtitel"] = ucfirst($data["actie"]); //twijfelgeval refactor
 	$data["limiet"] = (isset($_POST["limiet"]) && is_numeric($_POST["limiet"]) && $_POST["limiet"] > 0) ? (int)$_POST["limiet"] : 15;
-	$data["zoekterm"] = isset($_POST["zoekterm"]) ? clean($_POST["zoekterm"]) : null;
+	$data["zoek_term"] = isset($_POST["zoek_term"]) ? clean($_POST["zoek_term"]) : "";
 	
 	$data["kolom_titels"] = geef_kolommen($data["categorie"], ($data["actie"] == "overzicht"));
 	$data["presenteerbare_kolommen"] = array();
@@ -34,45 +34,37 @@
 	
 	$data["sorteer_kolom"] = isset($_POST["sorteer_kolom"]) ? (in_array($_POST["sorteer_kolom"], $data["kolom_titels"]) ? $_POST["sorteer_kolom"] : $data["kolom_titels"][0]) : $data["kolom_titels"][0];
 	$data["sorteer_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["sorteer_kolom"]));
+	$data["zoek_kolom"] = isset($_POST["zoek_kolom"]) ? clean($_POST["zoek_kolom"]) : $data["sorteer_kolom"];
+	$data["zoek_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["zoek_kolom"]));
 	$data["richting"] = isset($_POST["richting"]) ? ($_POST["richting"] == "ASC" ? $_POST["richting"] : "DESC") : "ASC";
 	$data["sorteer_richting_text"] = $data["richting"] == "ASC" ? "Oplopend" : "Aflopend";
 	$data["sorteer_richting_icoon"] = "fa-sort-amount-". strtolower($data["richting"]);
 	$data["pagina"] = (isset($_POST["pagina"]) && is_numeric($_POST["pagina"]) && $_POST["pagina"] > 0) ? $_POST["pagina"] : 1;
 	
-	if($data["actie"] == "zoeken") {
-		$query = "SELECT ". implode(", ", tick($data["kolom_titels"])) ." ".
-		"FROM ". $data["categorie"] ." ".
-		"WHERE ". tick($data["sorteer_kolom"]) ." LIKE :zoekterm ".
-		"ORDER BY :sorteer_kolom ". $data["richting"];
-		
-		$bind = array(
-			"zoekterm" => "%". $data["zoekterm"] ."%",
-			"sorteer_kolom" => $data["sorteer_kolom"]
-		);
-	} elseif($data["actie"] == "overzicht") {
-		$query = "SELECT ". implode(", ", tick($data["kolom_titels"])) ." ".
-		"FROM ". $data["categorie"] ." ".
-		"ORDER BY :sorteer_kolom ". $data["richting"];
+	$query = "SELECT ". implode(", ", tick($data["kolom_titels"])) ." ".
+			 "FROM ". tick($data["categorie"]) ." ".
+			 "WHERE ". tick($data["zoek_kolom"]) ." LIKE :zoek_term ".
+			 "ORDER BY ". tick($data["sorteer_kolom"]) ." ". $data["richting"];
 
-		$bind = array(
-			"sorteer_kolom" => $data["sorteer_kolom"]
-		);
-	}
-	
+	//Voer de query daadwerkelijk uit
 	try {
 		$stmt = $pdo->prepare($query);
-		$stmt->execute($bind);
+		$stmt->execute(array(
+			"zoek_term" => "%". $data["zoek_term"] ."%"
+		));
+		
 		$data["resultaten"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	} catch(PDOException $e) {
 		echo "Error: ". $e->getMessage();
 	}
-	
+
 	//Check of er gegevens opgehaald zijn
 	if(count($data["resultaten"]) > 0) {
 		$data["aantal_rijen"] = count($data["resultaten"]);
 		$data["aantal_paginas"] = ceil($data["aantal_rijen"] / $data["limiet"]);
 		$data["pagina"] = ($data["pagina"] > $data["aantal_paginas"] && $data["aantal_paginas"] > 0) ? $data["aantal_paginas"] : $data["pagina"];
 		
+		//Knip de resultaten af met een bepaalde offset en limiet voor paginatie
 		$data["resultaten"] = array_splice($data["resultaten"], (($data["pagina"] - 1) * $data["limiet"]), $data["limiet"]);
 	}
 	

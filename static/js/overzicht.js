@@ -27,15 +27,10 @@ $(document).ready(function() {
 		headers: headerSet
 	});
 	
-	//Bepaal de ingevoerde limiet of geef standaardwaarde
-	function getLim() {
-		return $("#input_limiet").val() < 1 ? ($("#input_limiet").attr("placeholder") < 1 ? 15 : $("#input_limiet").attr("placeholder")) : $("#input_limiet").val();
-	}
-	
 	//Redirect naar de juiste url aan de hand van het sorteermenu
 	$("#button_vertoon").click(function() {
 		$("#input_richting").val($("#richting_toggle").children("i").hasClass("fa-sort-amount-desc") ? "DESC" : "ASC");
-		$("#input_limiet").val(getLim());
+		$("#input_limiet").val($("#input_limiet").val() < 1 ? ($("#input_limiet").attr("placeholder") < 1 ? 15 : $("#input_limiet").attr("placeholder")) : $("#input_limiet").val());
 		$("#input_pagina").val($("#dropdown_input_pagina").val() > 0 ? $("#dropdown_input_pagina").val() : ($("#input_pagina").val() > 0 ? $("#input_pagina").val() : 1));
 		
 		$("#sorteer_form").submit();
@@ -45,11 +40,11 @@ $(document).ready(function() {
 	$("#richting_toggle").click(function() {
 		var curr = $(this).children("i").hasClass("fa-sort-amount-asc");
 		$(this).children("i").attr("class", "").addClass("fa fa-fw");
-		
-		$(this).children("span").text(curr ? "Aflopend" : "Oplopend");
 		$(this).children("i").addClass(curr ? "fa-sort-amount-desc" : "fa-sort-amount-asc");
+		$(this).children("span").text(curr ? "Aflopend" : "Oplopend");
 	});
 	
+	//Zodat de dropdown bij paginatie niet weg gaat
 	$("#dropdown_input_pagina").parent().click(function(e) {
 		e.preventDefault();
 
