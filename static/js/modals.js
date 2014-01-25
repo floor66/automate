@@ -8,7 +8,8 @@ $(document).ready(function() {
 		$("#zoek_modal").find(".mijn-dropdown-select").find("button").children("span").first().text("Zoeken op...");
 		$("#zoek_modal").find(".mijn-dropdown-select").find("li").removeClass("active");
 		$("#zoek_modal").find(".modal-title").children("span").text(a.parents("ul").siblings("a").text());
-		
+		$("#zoek_modal").find(".mijn-dropdown-select").find(".dropdown-menu").empty();
+
 		var kolommen = $.getJSON("/automate/inc/weergave.json", function(data) {
 			$.each(data[a.attr("href").split("/")[2]], function(key) {
 				$("#zoek_modal").find(".mijn-dropdown-select").find(".dropdown-menu").append("<li id=\""+ key +"\"><a href=\"#\">"+ (key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ") +"</a></li>");
