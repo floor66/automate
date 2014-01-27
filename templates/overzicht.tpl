@@ -48,8 +48,8 @@
 					</span>
 				</div>
 			</form>
-			{if $data.actie == "zoeken"}
-			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.zoek_kolom_leesbaar}</em> met '{$data.zoek_term}':</h4>
+			{if $data.actie == "zoeken" && !empty($data.zoek_term)}
+			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.zoek_kolom_leesbaar}</em> met '<em>{$data.zoek_term}</em>':</h4>
 			{/if}
 			<strong>Pagina: </strong>
 			<div class="btn-group" id="pagina_buttons">
@@ -108,7 +108,10 @@
 		{if $data.actie == "overzicht"}
 			<p>Er zijn geen gegevens in de database gevonden voor <strong>{$data.categorie|capitalize}</strong>. Raadpleeg de systeembeheerder als dit overwacht is.</p>
 		{elseif $data.actie == "zoeken"}
-			<p>Er zijn geen resultaten gevonden in <strong>{$data.categorie|capitalize}</strong> voor <strong>'{$data.zoek_kolom_leesbaar}'</strong> die <strong>'{$data.zoek_term}'</strong> bevat.</p>
+			<p>Er zijn geen resultaten gevonden in <strong>{$data.categorie|capitalize}</strong> voor '<em>{$data.zoek_kolom_leesbaar}</em>' die '<em>{$data.zoek_term}</em>' bevat.</p>
+		{/if}
+		{if isset($data.fout)}
+			<p><strong>Fout:</strong> {$data.fout}</p>
 		{/if}
 		</div>
 	</div>

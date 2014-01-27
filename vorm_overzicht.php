@@ -1,6 +1,6 @@
 <?php
 	require_once("inc/config.php");
-	
+
 	//Om aan het einde terug te geven aan Smarty
 	$data = array();
 
@@ -19,6 +19,12 @@
 	//Als er geen formulier verstuurd is, dus geen zoekopdracht, herleiden naar het overzicht
 	if($data["actie"] == "zoeken" && !$_POST) {
 		header("Location: /automate/". $_GET["cat"] ."/overzicht/");
+	}
+	
+	foreach($_POST as $key => $var) {
+		if(isset($var) && empty($var)) {
+			unset($_POST[$key]);
+		}
 	}
 	
 	$data["subtitel"] = ucfirst($data["actie"]); //twijfelgeval refactor
@@ -45,7 +51,8 @@
 			 "FROM ". tick($data["categorie"]) ." ".
 			 "WHERE ". tick($data["zoek_kolom"]) ." LIKE :zoek_term ".
 			 "ORDER BY ". tick($data["sorteer_kolom"]) ." ". $data["richting"];
-
+	
+	$data["resultaten"] = array();
 	//Voer de query daadwerkelijk uit
 	try {
 		$stmt = $pdo->prepare($query);
@@ -55,7 +62,7 @@
 		
 		$data["resultaten"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	} catch(PDOException $e) {
-		echo "Error: ". $e->getMessage();
+		$data["fout"] = $e->getMessage();
 	}
 
 	//Check of er gegevens opgehaald zijn
