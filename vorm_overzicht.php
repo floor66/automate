@@ -37,7 +37,7 @@
 
 	$data["presenteerbare_kolommen"] = array();
 	foreach($data["kolom_titels"] as $kolom) {
-		$data["presenteerbare_kolommen"][] = ucfirst(str_replace("_", " ", $kolom));
+		$data["presenteerbare_kolommen"][] = ucfirst(str_replace("_", " ", str_replace("_id", "", $kolom)));
 	}
 
 	$data["sorteer_kolom"] = isset($_POST["sorteer_kolom"]) ? (in_array($_POST["sorteer_kolom"], $data["kolom_titels"]) ? $_POST["sorteer_kolom"] : $data["kolom_titels"][0]) : $data["kolom_titels"][0];
@@ -75,6 +75,25 @@
 		
 		//Knip de resultaten af met een bepaalde offset en limiet voor paginatie
 		$data["resultaten"] = array_splice($data["resultaten"], (($data["pagina"] - 1) * $data["limiet"]), $data["limiet"]);
+		
+		//WIP: Toevoegen foreign keys naar opzoeken uit referenced tabel
+		//TODO: Toevoegen welke kolommen per vreemde tabel de vreemde $waarde moeten vormen
+		foreach($data["resultaten"] as &$resultaat) {
+			foreach($resultaat as $kolom => &$waarde) {
+				if(strstr($kolom, "_id") && $kolom != ($data["categorie"] ."_id")) {
+					$vreemd = db_get(array(
+						"kolommen" => "*",
+						"tabel" => substr($kolom, 0, -3),
+						"voorwaarden" => array(
+							$kolom => $waarde
+						),
+						"limiet" => 1
+					))[0];
+					
+					$waarde = $vreemd["voornaam"] ." ". $vreemd["tussenvoegsel"] ." ". $vreemd["achternaam"] ." (". $waarde .")";
+				}
+			}
+		}
 	}
 	
 	//Laat het overzicht zien
