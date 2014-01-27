@@ -1,32 +1,35 @@
 <?php
 	require_once("inc/config.php");
 	
-	$allowed = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek");
+	//Toegestane $_GET["cat"] opties
+	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract");
 	
-	if(empty($_SESSION["gebruiker"]) || empty($_GET["cat"]) || !in_array($_GET["cat"], $allowed)) {
+	if(empty($_SESSION["gebruiker"]) || empty($_GET["cat"]) || !in_array($_GET["cat"], $cat_toegestaan)) {
 		header("Location: /automate/");
 	}
 	
+	$data["categorie"] = $_GET["cat"];
+	$data["weergave_instellingen"] = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true);
+
 	if(isset($_POST["opslaan"])) {
-		$weergave = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true);
-		$curr = $weergave[$_GET["cat"]];
+		$inst = array();
 		
-		foreach($curr as $kolom => $status) {
+		foreach($data["weergave_instellingen"][$data["categorie"]] as $kolom => $status) {
 			$inst[$kolom] = isset($_POST[$kolom]) ? 1 : 0;
 		}
-		$inst[$_GET["cat"] ."_id"] = 1;
+		$inst[$data["categorie"] ."_id"] = 1;
 		
-		$weergave[$_GET["cat"]] = $inst;
-		if(file_put_contents(BESTAND_WEERGAVE_INSTELLINGEN, json_encode($weergave))) {
-			$smarty->assign("bericht", array("type" => "gelukt", "text" => "Weergave instellingen succesvol bijgewerkt!"));
+		$data["weergave_instellingen"][$data["categorie"]] = $inst;
+		if(file_put_contents(BESTAND_WEERGAVE_INSTELLINGEN, json_encode($data["weergave_instellingen"]))) {
+			$data["bericht"]["type"] = "gelukt";
+			$data["bericht"]["text"] = "Weergave instellingen succesvol bijgewerkt!";
 		} else {
-			$smarty->assign("bericht", array("type" => "fout", "text" => "Er is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder."));
+			$data["bericht"]["type"] = "fout";
+			$data["bericht"]["text"] = "Er is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder.";
 		}
 	}
 	
-	$smarty->assign("categorie", ucfirst($_GET["cat"]));
-	$weergave = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true);
-	
-	$smarty->assign("weergave_instellingen", $weergave[$_GET["cat"]]);
+	$data["weergave_instellingen"] = $data["weergave_instellingen"][$data["categorie"]];
+	$smarty->assign("data", $data);
 	$smarty->display("beheren.tpl");
 ?>

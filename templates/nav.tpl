@@ -24,7 +24,7 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/werkorder/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/werkorder/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -63,8 +63,20 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/auto/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/auto/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-credit-card"></i> Contract <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="/automate/contract/overzicht/"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Acties</li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="/automate/contract/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/contract/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -76,7 +88,7 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/factuur/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/factuur/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -88,7 +100,7 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Product zoeken</a></li>
+						<li><a href="/automate/inventaris/zoeken/"><i class="fa fa-fw fa-search"></i> Product zoeken</a></li>
 						<li><a href="/automate/inventaris/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
@@ -100,19 +112,31 @@
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="#"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/leverancier/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/leverancier/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-cog"></i> Instellingen <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-users"></i> Gebruiker <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li class="dropdown-header">Gebruikers</li>
+						<li class="dropdown-header">Bekijken</li>
 						<li><a href="/automate/gebruiker/overzicht/"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
-						<li><a href="/automate/gebruiker/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 						<li class="divider"></li>
-						<li class="dropdown-header">Logboeken</li>
+						<li class="dropdown-header">Acties</li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="/automate/gebruiker/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/gebruiker/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-book"></i> Logboek <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
 						<li><a href="/automate/logboek/overzicht/"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Acties</li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="/automate/logboek/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/logboek/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>

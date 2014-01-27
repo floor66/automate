@@ -48,9 +48,7 @@
 					</span>
 				</div>
 			</form>
-			{if $data.actie == "zoeken" && !empty($data.zoek_term)}
-			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden voor <em>{$data.zoek_kolom_leesbaar}</em> met '<em>{$data.zoek_term}</em>':</h4>
-			{/if}
+			<h4><em>{$data.aantal_rijen}</em> resultaten gevonden{if $data.actie == "zoeken" && isset($data.zoek_term)} voor <em>{$data.zoek_kolom_leesbaar}</em> met '<em>{$data.zoek_term}</em>'{/if}:</h4>
 			<strong>Pagina: </strong>
 			<div class="btn-group" id="pagina_buttons">
 			{if $data.aantal_paginas > 1}

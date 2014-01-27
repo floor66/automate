@@ -5,7 +5,7 @@
 	$data = array();
 
 	//Toegestane $_GET["cat"] opties
-	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek");
+	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract");
 	$acties_toegestaan = array("overzicht", "zoeken");
 	
 	//Check of de gebruiker ingelogd is / een geldige categorie is ingevuld
@@ -21,27 +21,27 @@
 		header("Location: /automate/". $_GET["cat"] ."/overzicht/");
 	}
 	
+	//unset lege strings uit $_POST
 	foreach($_POST as $key => $var) {
-		if(isset($var) && empty($var)) {
+		if(isset($var) && (gettype($var) == "string" && $var == "")) {
 			unset($_POST[$key]);
 		}
 	}
 	
-	$data["subtitel"] = ucfirst($data["actie"]); //twijfelgeval refactor
+	$data["subtitel"] = ucfirst($data["actie"]);
 	$data["limiet"] = (isset($_POST["limiet"]) && is_numeric($_POST["limiet"]) && $_POST["limiet"] > 0) ? (int)$_POST["limiet"] : 15;
 	$data["zoek_term"] = isset($_POST["zoek_term"]) ? clean($_POST["zoek_term"]) : "";
-	
-	$data["kolom_titels"] = geef_kolommen($data["categorie"], ($data["actie"] == "overzicht"));
+	$data["zoek_kolom"] = isset($_POST["zoek_kolom"]) ? clean($_POST["zoek_kolom"]) : $data["categorie"] ."_id";
+	$data["zoek_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["zoek_kolom"]));
+	$data["kolom_titels"] = geef_kolommen($data["categorie"], $data["zoek_kolom"]);
+
 	$data["presenteerbare_kolommen"] = array();
-	
 	foreach($data["kolom_titels"] as $kolom) {
 		$data["presenteerbare_kolommen"][] = ucfirst(str_replace("_", " ", $kolom));
 	}
-	
+
 	$data["sorteer_kolom"] = isset($_POST["sorteer_kolom"]) ? (in_array($_POST["sorteer_kolom"], $data["kolom_titels"]) ? $_POST["sorteer_kolom"] : $data["kolom_titels"][0]) : $data["kolom_titels"][0];
 	$data["sorteer_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["sorteer_kolom"]));
-	$data["zoek_kolom"] = isset($_POST["zoek_kolom"]) ? clean($_POST["zoek_kolom"]) : $data["sorteer_kolom"];
-	$data["zoek_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["zoek_kolom"]));
 	$data["richting"] = isset($_POST["richting"]) ? ($_POST["richting"] == "ASC" ? $_POST["richting"] : "DESC") : "ASC";
 	$data["sorteer_richting_text"] = $data["richting"] == "ASC" ? "Oplopend" : "Aflopend";
 	$data["sorteer_richting_icoon"] = "fa-sort-amount-". strtolower($data["richting"]);
@@ -51,6 +51,8 @@
 			 "FROM ". tick($data["categorie"]) ." ".
 			 "WHERE ". tick($data["zoek_kolom"]) ." LIKE :zoek_term ".
 			 "ORDER BY ". tick($data["sorteer_kolom"]) ." ". $data["richting"];
+	
+	//echo "<PRE>";print_r($data);echo "</PRE>";
 	
 	$data["resultaten"] = array();
 	//Voer de query daadwerkelijk uit

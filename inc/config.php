@@ -108,16 +108,12 @@
 		return htmlentities(strip_tags($str));
 	}
 	
-	function geef_kolommen($categorie, $alleen_actief) {
+	function geef_kolommen($categorie, $zoek_kolom) {
 		$weergave_inst_bestand = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$categorie];
 		$tmp = array();
 		
 		foreach($weergave_inst_bestand as $kolom => $status) {
-			if($alleen_actief == true) {
-				if($status == 1) {
-					$tmp[] = $kolom;
-				}
-			} else {
+			if($kolom == $zoek_kolom || $status == 1) {
 				$tmp[] = $kolom;
 			}
 		}
