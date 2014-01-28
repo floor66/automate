@@ -28,32 +28,38 @@
 	
 	if(isset($_POST["opslaan"])) {
 		$instellingen["overzicht_kolommen"][$data["categorie"]] = array($data["categorie"] ."_id");
+		$instellingen["vreemde_weergaven"][$data["categorie"]] = array();
 		
 		foreach($data["kolommen"] as $kolom) {
 			if(isset($_POST["overzicht_kolommen"][$kolom["titel"]])) {
 				$instellingen["overzicht_kolommen"][$data["categorie"]][] = $kolom["titel"];
 			}
+			
 			if(isset($_POST["vreemde_weergaven"][$kolom["titel"]])) {
 				$instellingen["vreemde_weergaven"][$data["categorie"]][] = $kolom["titel"];
 			}
 		}
 		
 		if(file_put_contents(INSTELLINGEN_BESTAND, json_encode($instellingen))) {
-			$data["bericht"]["type"] = "gelukt";
-			$data["bericht"]["text"] = "Weergave instellingen succesvol bijgewerkt!";
+			$data["bericht"] = array(
+				"type" => "gelukt",
+				"text" => "Weergave instellingen succesvol bijgewerkt!"
+			);
 		} else {
-			$data["bericht"]["type"] = "fout";
-			$data["bericht"]["text"] = "Er is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder.";
+			$data["bericht"] = array(
+				"type" => "fout",
+				"text" => "WeergEr is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder."
+			);
 		}
 	}
 
-	foreach($data["kolommen"] as $kolom => $waarde) {
-		if(!@in_array($kolom, $instellingen["overzicht_kolommen"][$data["categorie"]])) {
-			$data["kolommen"][$kolom]["weergeven_in_overzicht"] = 0;
+	foreach($data["kolommen"] as $kolom) {
+		if(!@in_array($kolom["titel"], $instellingen["overzicht_kolommen"][$data["categorie"]])) {
+			$data["kolommen"][$kolom["titel"]]["weergeven_in_overzicht"] = 0;
 		}
 		
-		if(!@in_array($kolom, $instellingen["vreemde_weergaven"][$data["categorie"]])) {
-			$data["kolommen"][$kolom]["weergeven_als_vreemd"] = 0;
+		if(!@in_array($kolom["titel"], $instellingen["vreemde_weergaven"][$data["categorie"]])) {
+			$data["kolommen"][$kolom["titel"]]["weergeven_als_vreemd"] = 0;
 		}
 	}
 	

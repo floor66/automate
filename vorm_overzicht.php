@@ -52,7 +52,6 @@
 			 "WHERE ". tick($data["zoek_kolom"]) ." LIKE :zoek_term ".
 			 "ORDER BY ". tick($data["sorteer_kolom"]) ." ". $data["richting"];
 	
-	//echo "<PRE>";print_r($data);echo "</PRE>";
 	
 	$data["resultaten"] = array();
 	//Voer de query daadwerkelijk uit
@@ -75,22 +74,32 @@
 		
 		//Knip de resultaten af met een bepaalde offset en limiet voor paginatie
 		$data["resultaten"] = array_splice($data["resultaten"], (($data["pagina"] - 1) * $data["limiet"]), $data["limiet"]);
-		
-		//WIP: Toevoegen foreign keys naar opzoeken uit referenced tabel
-		//TODO: Toevoegen welke kolommen per vreemde tabel de vreemde $waarde moeten vormen
+
+		//Als er een vreemde sleutel (bijv. klant_id in 'Auto') voorkomt, laat dan de gekozen kolommen uit de instellingen zien ipv klant_id
 		foreach($data["resultaten"] as &$resultaat) {
 			foreach($resultaat as $kolom => &$waarde) {
 				if(strstr($kolom, "_id") && $kolom != ($data["categorie"] ."_id")) {
-					$vreemd = db_get(array(
-						"kolommen" => "*",
-						"tabel" => substr($kolom, 0, -3),
-						"voorwaarden" => array(
-							$kolom => $waarde
-						),
-						"limiet" => 1
-					))[0];
-					
-					$waarde = $waarde .", ". $vreemd["voornaam"] ." ". $vreemd["tussenvoegsel"] ." ". $vreemd["achternaam"];
+					$instellingen = json_decode(file_get_contents(INSTELLINGEN_BESTAND), true);
+					$categorie = substr($kolom, 0, -3);
+
+					if(isset($instellingen["vreemde_weergaven"][$categorie])) {
+						if(count($instellingen["vreemde_weergaven"][$categorie]) > 0) {
+							$vreemd = db_get(array(
+								"kolommen" => $instellingen["vreemde_weergaven"][$categorie],
+								"tabel" => $categorie,
+								"voorwaarden" => array(
+									$kolom => $waarde
+								),
+								"limiet" => 1
+							))[0];
+							
+							$waarde .= ", ";
+							
+							foreach($vreemd as $vreemde_waarde) {
+								$waarde .= $vreemde_waarde ." ";
+							}
+						}
+					}
 				}
 			}
 		}
