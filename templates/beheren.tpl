@@ -8,32 +8,44 @@
 
 {block name="container"}
 <div class="row">
-	{if isset($data.weergave_instellingen)}
+	{if isset($data.kolommen)}
 	<div class="panel panel-default">
 		<div class="panel-heading"><h2><i class="fa fa-wrench"></i> {$data.categorie|capitalize} <small>Beheren</small></h2></div>
 		<div class="panel-body">
-			{if isset($data.bericht)}
-			<div class="alert alert-{if $data.bericht.type == 'fout'}danger{else}success{/if} alert-dismissable text-center">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				{$data.bericht.text}
-			</div>
-			{/if}
-			Kies hier welke kolummen u wil laten zien in het overzicht/de zoekresultaten voor <strong>{$data.categorie|capitalize}</strong>.
+			<form method="post" action="/automate/{$data.categorie}/beheren/">
+				<div class="row">
+					{if isset($data.bericht)}
+					<div class="alert alert-{if $data.bericht.type == 'fout'}danger{else}success{/if} alert-dismissable text-center">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{$data.bericht.text}
+					</div>
+					{/if}
+						<div class="col-md-6">
+							<p>Kies hier welke kolummen u wil laten zien in het overzicht/de zoekresultaten voor <strong>{$data.categorie|capitalize}</strong>.</p>
+							<ul style="list-style-type: none;">
+							{foreach $data.kolommen as $kolom}
+								<li><label><input type="checkbox" name="overzicht_kolommen[{$kolom.titel}]" {if $kolom.weergeven_in_overzicht == 1} checked{/if}{if $kolom.titel == "{$data.categorie}_id"} disabled{/if} /> <strong>{$kolom.titel_net}</strong></label></li>
+							{/foreach}
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<p>Als er in een overzicht/zoekresultaat gerefereerd wordt naar '<strong>{$data.categorie|capitalize}</strong>', laat dan deze waarde(n) zien:</p>
+							<ul style="list-style-type: none;">
+							{foreach $data.kolommen as $kolom}
+								<li><label><input type="checkbox" name="vreemde_weergaven[{$kolom.titel}]" {if $kolom.weergeven_als_vreemd == 1} checked{/if} /> <strong>{$kolom.titel_net}</strong></label></li>
+							{/foreach}
+							</ul>
+						</div>
+				</div>
+				<input type="submit" name="opslaan" class="btn btn-lg btn-primary btn-block" id="opslaan" value="Opslaan" />
+			</form>
 		</div>
-		<form method="post" action="/automate/{$smarty.get.cat}/beheren/">
-			<ul style="list-style-type: none;">
-			{foreach $data.weergave_instellingen as $kolom => $status}
-				<li><label><input type="checkbox" name="{$kolom}" value="{$status}"{if $status == 1} checked{/if}{if $kolom == "{$data.categorie}_id"} disabled{/if} /> <strong>{$kolom}</strong></label></li>
-			{/foreach}
-			</ul>
-			<input type="submit" name="opslaan" class="btn btn-lg btn-primary btn-block" id="opslaan" value="Opslaan" />
-		</form>
 	</div>
 	{else}
 	<div class="panel panel-danger">
 		<div class="panel-heading"><h3><i class="fa fa-exclamation-triangle"></i> Kritieke fout</h3></div>
 		<div class="panel-body">
-			<p>Er zijn geen instellingen gevonden voor <strong>'{$data.categorie}'</strong>. Raadpleeg de systeembeheerder.</p>
+			<p>Er zijn geen instellingen gevonden voor <strong>'{$data.categorie|capitalize}'</strong>. Raadpleeg de systeembeheerder.</p>
 		</div>
 	</div>
 	{/if}

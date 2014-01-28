@@ -90,7 +90,7 @@
 						"limiet" => 1
 					))[0];
 					
-					$waarde = $vreemd["voornaam"] ." ". $vreemd["tussenvoegsel"] ." ". $vreemd["achternaam"] ." (". $waarde .")";
+					$waarde = $waarde .", ". $vreemd["voornaam"] ." ". $vreemd["tussenvoegsel"] ." ". $vreemd["achternaam"];
 				}
 			}
 		}

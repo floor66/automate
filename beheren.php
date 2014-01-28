@@ -9,18 +9,36 @@
 	}
 	
 	$data["categorie"] = $_GET["cat"];
-	$data["weergave_instellingen"] = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true);
+	$instellingen = json_decode(file_get_contents(INSTELLINGEN_BESTAND), true);
+	
+	$rij = db_get(array(
+		"kolommen" => "*",
+		"tabel" => $data["categorie"],
+		"limiet" => 1
+	))[0];
 
+	foreach($rij as $kolom => $waarde) {
+		$data["kolommen"][$kolom] = array(
+			"titel" => $kolom,
+			"titel_net" => ucfirst(str_replace("_", " ", $kolom)),
+			"weergeven_in_overzicht" => 1,
+			"weergeven_als_vreemd" => 1
+		);
+	}
+	
 	if(isset($_POST["opslaan"])) {
-		$inst = array();
+		$instellingen["overzicht_kolommen"][$data["categorie"]] = array($data["categorie"] ."_id");
 		
-		foreach($data["weergave_instellingen"][$data["categorie"]] as $kolom => $status) {
-			$inst[$kolom] = isset($_POST[$kolom]) ? 1 : 0;
+		foreach($data["kolommen"] as $kolom) {
+			if(isset($_POST["overzicht_kolommen"][$kolom["titel"]])) {
+				$instellingen["overzicht_kolommen"][$data["categorie"]][] = $kolom["titel"];
+			}
+			if(isset($_POST["vreemde_weergaven"][$kolom["titel"]])) {
+				$instellingen["vreemde_weergaven"][$data["categorie"]][] = $kolom["titel"];
+			}
 		}
-		$inst[$data["categorie"] ."_id"] = 1;
 		
-		$data["weergave_instellingen"][$data["categorie"]] = $inst;
-		if(file_put_contents(BESTAND_WEERGAVE_INSTELLINGEN, json_encode($data["weergave_instellingen"]))) {
+		if(file_put_contents(INSTELLINGEN_BESTAND, json_encode($instellingen))) {
 			$data["bericht"]["type"] = "gelukt";
 			$data["bericht"]["text"] = "Weergave instellingen succesvol bijgewerkt!";
 		} else {
@@ -28,8 +46,17 @@
 			$data["bericht"]["text"] = "Er is iets fout gegaan bij het opslaan van de instellingen. Raadpleeg de systeembeheerder.";
 		}
 	}
+
+	foreach($data["kolommen"] as $kolom => $waarde) {
+		if(!@in_array($kolom, $instellingen["overzicht_kolommen"][$data["categorie"]])) {
+			$data["kolommen"][$kolom]["weergeven_in_overzicht"] = 0;
+		}
+		
+		if(!@in_array($kolom, $instellingen["vreemde_weergaven"][$data["categorie"]])) {
+			$data["kolommen"][$kolom]["weergeven_als_vreemd"] = 0;
+		}
+	}
 	
-	$data["weergave_instellingen"] = $data["weergave_instellingen"][$data["categorie"]];
 	$smarty->assign("data", $data);
 	$smarty->display("beheren.tpl");
 ?>

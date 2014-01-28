@@ -109,22 +109,13 @@
 	}
 	
 	function geef_kolommen($categorie, $zoek_kolom) {
-		$weergave_inst_bestand = json_decode(file_get_contents(BESTAND_WEERGAVE_INSTELLINGEN), true)[$categorie];
-		$tmp = array();
-		
-		foreach($weergave_inst_bestand as $kolom => $status) {
-			if($kolom == $zoek_kolom || $status == 1) {
-				$tmp[] = $kolom;
-			}
-		}
-		
-		return $tmp;
+		return json_decode(file_get_contents(INSTELLINGEN_BESTAND), true)["overzicht_kolommen"][$categorie];
 	}
 	
 	setlocale(LC_ALL, "nld_nld");
 	define("GEBRUIKER_NORMAAL", 0);
 	define("GEBRUIKER_BEHEERDER", 1);
-	define("BESTAND_WEERGAVE_INSTELLINGEN", "inc/weergave.json");
+	define("INSTELLINGEN_BESTAND", "inc/instellingen.json");
 	define("STATIC_FOLDER", "/automate/static");
 	session_start();
 ?>
