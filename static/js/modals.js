@@ -10,9 +10,9 @@ $(document).ready(function() {
 		$("#zoek_modal").find(".modal-title").children("span").text(a.parents("ul").siblings("a").text());
 		$("#zoek_modal").find(".mijn-dropdown-select").find(".dropdown-menu").empty();
 
-		var kolommen = $.getJSON("/automate/inc/instellingen.json", function(data) {
-			$.each(data["overzicht_kolommen"][a.attr("href").split("/")[2]], function(key) {
-				$("#zoek_modal").find(".mijn-dropdown-select").find(".dropdown-menu").append("<li id=\""+ key +"\"><a href=\"#\">"+ (key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ") +"</a></li>");
+		$.getJSON("/automate/geef_kolommen.php?cat="+ a.attr("href").split("/")[2], function(data) {
+			$.each(data, function(key, val) {
+				$("#zoek_modal").find(".mijn-dropdown-select").find(".dropdown-menu").append("<li id=\""+ val +"\"><a href=\"#\">"+ (val.charAt(0).toUpperCase() + val.slice(1)).replace("_", " ") +"</a></li>");
 			});
 		});
 	});

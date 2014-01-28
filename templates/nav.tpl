@@ -93,15 +93,27 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i> Inventaris <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-edit"></i> Inventaris <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Bekijken</li>
 						<li><a href="/automate/inventaris/overzicht/"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">Acties</li>
 						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
-						<li><a href="/automate/inventaris/zoeken/"><i class="fa fa-fw fa-search"></i> Product zoeken</a></li>
+						<li><a href="/automate/inventaris/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
 						<li><a href="/automate/inventaris/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-shopping-cart"></i> Product <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Bekijken</li>
+						<li><a href="/automate/product/overzicht/"><i class="fa fa-fw fa-bars"></i> Overzicht</a></li>
+						<li class="divider"></li>
+						<li class="dropdown-header">Acties</li>
+						<li><a href="#"><i class="fa fa-fw fa-file"></i> Nieuw</a></li>
+						<li><a href="/automate/product/zoeken/"><i class="fa fa-fw fa-search"></i> Zoeken</a></li>
+						<li><a href="/automate/product/beheren/"><i class="fa fa-fw fa-wrench"></i> Beheren</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

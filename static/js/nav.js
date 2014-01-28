@@ -1,4 +1,4 @@
-var pages = ["werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract"];
+var pages = ["werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract", "product"];
 
 var curr_page = "dashboard";
 var loc = window.location.pathname;

@@ -108,8 +108,20 @@
 		return htmlentities(strip_tags($str));
 	}
 	
-	function geef_kolommen($categorie, $zoek_kolom) {
-		return json_decode(file_get_contents(INSTELLINGEN_BESTAND), true)["overzicht_kolommen"][$categorie];
+	function geef_kolommen($categorie) {
+		$tmp = array();
+		
+		$rij = db_get(array(
+			"kolommen" => "*",
+			"tabel" => $categorie,
+			"limiet" => 1
+		))[0];
+		
+		foreach($rij as $kolom => $waarde) {
+			$tmp[] = $kolom;
+		}
+	
+		return $tmp;
 	}
 	
 	setlocale(LC_ALL, "nld_nld");

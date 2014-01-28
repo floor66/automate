@@ -2,7 +2,7 @@
 	require_once("inc/config.php");
 	
 	//Toegestane $_GET["cat"] opties
-	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract");
+	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract", "product");
 	
 	if(empty($_SESSION["gebruiker"]) || empty($_GET["cat"]) || !in_array($_GET["cat"], $cat_toegestaan)) {
 		header("Location: /automate/");
