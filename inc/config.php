@@ -32,73 +32,7 @@
 			return "`". $v ."`";
 		}
 	}
-	
-	/* function db_get($settings) 
-	 * Simpele functie om dyamische prepared SELECT statements te maken
-	 * Parameters ($settings assoc. array):
-	 * "kolommen"		Welke kolommen op te vragen
-	 * "tabel"			Uit welke tabel deze te halen
-	 * "voorwaarden"	Onder welke voorwaarden (WHERE)
-	 * "sorteer_op"		Sorteer (ORDER BY) op deze kolom
-	 * "limiet"			Met welke limit (LIMIT)
-	 */
-	function db_get($settings) {
-		global $pdo;
 		
-		if(empty($settings["kolommen"]) || empty($settings["tabel"])) {
-			return NULL;
-		}
-		
-		if(gettype($settings["kolommen"]) == "array") {
-			$kolommen = implode(", ", tick($settings["kolommen"]));
-		} else {
-			$kolommen = "*";
-		}
-		$tabel = tick($settings["tabel"]);
-		$query = "SELECT ". $kolommen ." FROM ". $tabel;
-		
-		if(isset($settings["voorwaarden"]) && count($settings["voorwaarden"]) > 0) {
-			$voorwaarden = array();
-			
-			foreach($settings["voorwaarden"] as $kolom => $waarde) {
-				$voorwaarden[] = tick($kolom) ." = :". $kolom;
-			}
-			
-			$voorwaarden = implode(", ", $voorwaarden);
-			$query .= " WHERE ". $voorwaarden;
-		}
-		
-		if(isset($settings["sorteer_op"])) {
-			$query .= " ORDER BY ". $settings["sorteer_op"]["kolom"] ." ". $settings["sorteer_op"]["richting"];
-		}
-		
-		if(isset($settings["limiet"])) {
-			if(gettype($settings["limiet"]) == "array") {
-				$query .= " LIMIT ". $settings["limiet"]["offset"] .", ". $settings["limiet"]["aantal"];
-			} elseif($settings["limiet"] > 0) {
-				$query .= " LIMIT ". $settings["limiet"];
-			}
-		}
-		
-		try {
-			$stmt = $pdo->prepare($query);
-			
-			if(isset($voorwaarden)) {
-				$stmt->execute($settings["voorwaarden"]);
-			} else {
-				$stmt->execute();
-			}
-			
-			$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			
-			return count($row) > 0 ? $row : NULL;
-		} catch(PDOException $e) {
-			echo "Error: ". $e->getMessage();
-		}
-		
-		return NULL;
-	}
-	
 	/* Overige configuratie */
 	
 	/* function clean($str)
@@ -109,16 +43,17 @@
 	}
 	
 	function geef_kolommen($categorie) {
+		global $pdo;
+		
 		$tmp = array();
 		
-		$rij = db_get(array(
-			"kolommen" => "*",
-			"tabel" => $categorie,
-			"limiet" => 1
-		))[0];
+		$stmt = $pdo->prepare("SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'auto_mate' AND `TABLE_NAME` = ?");
+		$stmt->execute(array($categorie));
 		
-		foreach($rij as $kolom => $waarde) {
-			$tmp[] = $kolom;
+		$rij = $stmt->fetchAll();
+		
+		foreach($rij as $kolom) {
+			$tmp[] = $kolom["COLUMN_NAME"];
 		}
 	
 		return $tmp;

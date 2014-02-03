@@ -5,17 +5,10 @@
 	if(empty($_SESSION["gebruiker"])) {
 		//Check of het inlogforumulier verstuurd is
 		if($_POST) {
-			$gebruiker = db_get(array(
-				"kolommen" => array(
-					"wachtwoord", "klant_id"
-				),
-				"tabel" => "gebruiker",
-				"voorwaarden" => array(
-					"gebruikersnaam" => $_POST["gebruikersnaam"]
-				),
-				"limiet" => 1
-			))[0];
-			
+			$stmt = $pdo->prepare("SELECT `wachtwoord`, `klant_id` FROM `gebruiker` WHERE `gebruikersnaam` = ? LIMIT 1");
+			$stmt->execute(array($_POST["gebruikersnaame"]));
+			$gebruiker = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+
 			//Check het ingevoerde wachtwoord tegen het wachtwoord in de database
 			if($gebruiker["wachtwoord"] == sha1(sha1($_POST["wachtwoord"]))) {
 				$_SESSION["gebruiker"] = clean($_POST["gebruikersnaam"]);
@@ -33,18 +26,11 @@
 	} else {
 		//Haal enkele gegevens over de ingelogde gebruiker uit de database, indien toepasselijk
 		if(isset($_SESSION["klant_id"])) {
-			$gebruiker_klant = db_get(array(
-				"kolommen" => array(
-					"voornaam"
-				),
-				"tabel" => "klant",
-				"voorwaarden" => array(
-					"klant_id" => $_SESSION["klant_id"]
-				),
-				"limiet" => 1
-			))[0];
-			
-			$smarty->assign("voornaam", $gebruiker_klant["voornaam"]);
+			$stmt = $pdo->prepare("SELECT `voornaam` FROM `klant` WHERE `klant_id` = ? LIMIT 1");
+			$stmt->execute(array($_SESSION["klant_id"]));
+			$klant = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+
+			$smarty->assign("voornaam", $klant["voornaam"]);
 		} else {
 			$smarty->assign("voornaam", $_SESSION["gebruiker"]);
 		}

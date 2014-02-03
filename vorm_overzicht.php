@@ -84,14 +84,9 @@
 
 					if(isset($instellingen["vreemde_weergaven"][$categorie])) {
 						if(count($instellingen["vreemde_weergaven"][$categorie]) > 0) {
-							$vreemd = db_get(array(
-								"kolommen" => $instellingen["vreemde_weergaven"][$categorie],
-								"tabel" => $categorie,
-								"voorwaarden" => array(
-									$kolom => $waarde
-								),
-								"limiet" => 1
-							))[0];
+							$stmt = $pdo->prepare("SELECT ". implode(", ", tick($instellingen["vreemde_weergaven"][$categorie])) ." FROM ". tick($categorie) ." WHERE ". tick($kolom) ." = ? LIMIT 1");
+							$stmt->execute(array($waarde));
+							$vreemd = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 							
 							$waarde .= ", ";
 							

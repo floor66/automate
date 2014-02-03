@@ -10,14 +10,9 @@
 	
 	$data["categorie"] = $_GET["cat"];
 	$instellingen = json_decode(file_get_contents(INSTELLINGEN_BESTAND), true);
+	$kolommen = geef_kolommen($data["categorie"]);
 	
-	$rij = db_get(array(
-		"kolommen" => "*",
-		"tabel" => $data["categorie"],
-		"limiet" => 1
-	))[0];
-
-	foreach($rij as $kolom => $waarde) {
+	foreach($kolommen as $kolom) {
 		$data["kolommen"][$kolom] = array(
 			"titel" => $kolom,
 			"titel_net" => ucfirst(str_replace("_", " ", $kolom)),
