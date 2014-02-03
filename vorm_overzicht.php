@@ -4,10 +4,6 @@
 	//Om aan het einde terug te geven aan Smarty
 	$data = array();
 
-	//Toegestane $_GET["cat"] opties
-	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract", "product");
-	$acties_toegestaan = array("overzicht", "zoeken");
-	
 	//Check of de gebruiker ingelogd is / een geldige categorie is ingevuld
 	if(empty($_SESSION["gebruiker"]) || empty($_GET["cat"]) || !in_array($_GET["cat"], $cat_toegestaan) || !in_array($_GET["actie"], $acties_toegestaan)) {
 		header("Location: /automate/");
@@ -33,7 +29,8 @@
 	$data["zoek_term"] = isset($_POST["zoek_term"]) ? clean($_POST["zoek_term"]) : "";
 	$data["zoek_kolom"] = isset($_POST["zoek_kolom"]) ? clean($_POST["zoek_kolom"]) : $data["categorie"] ."_id";
 	$data["zoek_kolom_leesbaar"] = ucfirst(str_replace("_", " ", $data["zoek_kolom"]));
-	$data["kolom_titels"] = geef_kolommen($data["categorie"]);
+	$instellingen = json_decode(file_get_contents(INSTELLINGEN_BESTAND), true);
+	$data["kolom_titels"] = isset($instellingen["overzicht_kolommen"][$data["categorie"]]) ? $instellingen["overzicht_kolommen"][$data["categorie"]] : geef_kolommen($data["categorie"]);
 
 	$data["presenteerbare_kolommen"] = array();
 	foreach($data["kolom_titels"] as $kolom) {
@@ -88,11 +85,7 @@
 							$stmt->execute(array($waarde));
 							$vreemd = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 							
-							$waarde .= ", ";
-							
-							foreach($vreemd as $vreemde_waarde) {
-								$waarde .= $vreemde_waarde ." ";
-							}
+							$waarde .= " (". implode(" ", $vreemd) .")";
 						}
 					}
 				}

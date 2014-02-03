@@ -16,6 +16,12 @@
 		echo "Error: ". $e->getMessage();
 	}
 	
+	/* Overige configuratie */
+	
+	/* function clean($str)
+	 * Maakt input string schoon
+	 */
+	 
 	/* function tick($v) 
 	 * Omringt variabelen met accent graves (`)
 	 */
@@ -33,15 +39,16 @@
 		}
 	}
 		
-	/* Overige configuratie */
-	
-	/* function clean($str)
-	 * Maakt input string schoon
+	/* function clean($str) 
+	 * Maak input schoon
 	 */
 	function clean($str) {
 		return htmlentities(strip_tags($str));
 	}
 	
+	/* function geef_kolommen($categorie) 
+	 * Geef de kolomnamen van de gegeven tabel
+	 */
 	function geef_kolommen($categorie) {
 		global $pdo;
 		
@@ -64,5 +71,21 @@
 	define("GEBRUIKER_BEHEERDER", 1);
 	define("INSTELLINGEN_BESTAND", "inc/instellingen.json");
 	define("STATIC_FOLDER", "/automate/static");
+	$cat_toegestaan = array(
+		"werkorder",
+		"klant",
+		"auto",
+		"factuur",
+		"inventaris",
+		"leverancier",
+		"gebruiker",
+		"logboek",
+		"contract",
+		"product"
+	);
+	$acties_toegestaan = array(
+		"overzicht",
+		"zoeken"
+	);
 	session_start();
 ?>

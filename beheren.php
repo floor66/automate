@@ -1,9 +1,6 @@
 <?php
 	require_once("inc/config.php");
 	
-	//Toegestane $_GET["cat"] opties
-	$cat_toegestaan = array("werkorder", "klant", "auto", "factuur", "inventaris", "leverancier", "gebruiker", "logboek", "contract", "product");
-	
 	if(empty($_SESSION["gebruiker"]) || empty($_GET["cat"]) || !in_array($_GET["cat"], $cat_toegestaan)) {
 		header("Location: /automate/");
 	}
@@ -49,7 +46,7 @@
 	}
 
 	foreach($data["kolommen"] as $kolom) {
-		if(!@in_array($kolom["titel"], $instellingen["overzicht_kolommen"][$data["categorie"]])) {
+		if(!@in_array($kolom["titel"], $instellingen["overzicht_kolommen"][$data["categorie"]]) && $kolom["titel"] != $data["categorie"] ."_id") {
 			$data["kolommen"][$kolom["titel"]]["weergeven_in_overzicht"] = 0;
 		}
 		
