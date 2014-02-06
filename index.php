@@ -6,7 +6,7 @@
 		//Check of het inlogforumulier verstuurd is
 		if($_POST) {
 			$stmt = $pdo->prepare("SELECT `wachtwoord`, `klant_id` FROM `gebruiker` WHERE `gebruikersnaam` = ? LIMIT 1");
-			$stmt->execute(array($_POST["gebruikersnaame"]));
+			$stmt->execute(array($_POST["gebruikersnaam"]));
 			$gebruiker = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 
 			//Check het ingevoerde wachtwoord tegen het wachtwoord in de database
