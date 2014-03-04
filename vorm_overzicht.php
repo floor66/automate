@@ -34,7 +34,7 @@
 
 	$data["presenteerbare_kolommen"] = array();
 	foreach($data["kolom_titels"] as $kolom) {
-		$data["presenteerbare_kolommen"][] = ucfirst(str_replace("_", " ", str_replace("_id", "", $kolom)));
+		$data["presenteerbare_kolommen"][] = ucfirst(str_replace("_", " ", $kolom));
 	}
 
 	$data["sorteer_kolom"] = isset($_POST["sorteer_kolom"]) ? (in_array($_POST["sorteer_kolom"], $data["kolom_titels"]) ? $_POST["sorteer_kolom"] : $data["kolom_titels"][0]) : $data["kolom_titels"][0];

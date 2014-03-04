@@ -9,6 +9,7 @@
 {block name="container"}
 <div class="jumbotron">
 	<h1><i class="fa fa-bar-chart-o"></i> Dashboard</h1>
-	<p>Welkom, {$voornaam}. Dit is het overzicht van {$smarty.now|date_format:"%d %B %Y"}.</p>
+	<p>Welkom, {$voornaam}. Dit is het overzicht van {$smarty.now|date_format:"%e %B %Y"}.</p>
+	<p>Het systeem bevat {$aantallen["klant"]} klanten, {$aantallen["auto"]} auto's en {$aantallen["product"]} producten.</p>
 </div>
 {/block}

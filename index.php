@@ -35,6 +35,16 @@
 			$smarty->assign("voornaam", $_SESSION["gebruiker"]);
 		}
 		
+		//Haal aantal records uit de database
+		$stmt = $pdo->prepare("SELECT `TABLE_NAME`, `TABLE_ROWS` FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = 'auto_mate'");
+		$stmt->execute();
+		$tabellen = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		foreach($tabellen as $tabel) {
+			$aantallen[$tabel["TABLE_NAME"]] = $tabel["TABLE_ROWS"];
+		}
+		$smarty->assign("aantallen", $aantallen);
+		
 		//Laat het dashboard zien
 		$smarty->display("dashboard.tpl");
 	}
