@@ -1,5 +1,6 @@
 RewriteEngine On
 
 RewriteRule ^([a-z]+)/beheren/$ beheren.php?cat=$1 [L]
-RewriteRule ^([a-z]+)/([a-z]+)/$ vorm_overzicht.php?cat=$1&actie=$2
+RewriteRule ^([a-z]+)/(zoeken|overzicht)/$ vorm_overzicht.php?cat=$1&actie=$2
+RewriteRule ^([a-z]+)/nieuw/$ nieuw.php?cat=$1
 RewriteRule ^logout/$ logout.php
