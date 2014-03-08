@@ -1,0 +1,20 @@
+.verplicht {
+	color: #FF0000;
+	font-style: italic;
+}
+
+.left {
+	width: 40%;
+	float: left;
+}
+
+.right {
+	width: 40%;
+	float: right;
+}
+
+.submit {
+	width: 80%;
+	margin: 15px auto;
+}
+
