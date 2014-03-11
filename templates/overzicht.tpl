@@ -14,7 +14,7 @@
 <div class="row">
 {if $data.resultaten|count > 0}
 	<div class="panel panel-default">
-		<div class="panel-heading"><h2><i class="fa fa-bars"></i> {$data.categorie|capitalize} <small>{$data.subtitel}</small></h2></div>
+		<div class="panel-heading"><h2><i class="fa fa-{$data.icoon}"></i> {$data.categorie|capitalize} <small>{$data.subtitel}</small></h2></div>
 		<div class="panel-body">
 			<form method="post" action="/automate/{$data.categorie}/{$data.actie}/" id="sorteer_form">
 				{if $data.actie == "zoeken"}

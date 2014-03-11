@@ -12,7 +12,19 @@
 	$data["categorie"] = $_GET["cat"];
 	
 	if(isset($_POST["nieuw"])) {
-		//handle saving to db
+		//NIET LOSER-PROOF
+		unset($_POST["nieuw"]);
+		$kolommen = implode(", ", array_keys($_POST));
+		$kolommen_ex = ":". implode(", :", array_keys($_POST));
+		
+		try {
+			$stmt = $pdo->prepare("INSERT INTO `". $data["categorie"] ."` (". $kolommen .") VALUES (". $kolommen_ex .")");
+			$stmt->execute($_POST);
+			
+			$data["gelukt"] = "Gelukt!";
+		} catch(PDOException $e) {
+			$data["fout"] = $e->getMessage();
+		}
 	}
 	
 	//Laat het overzicht zien

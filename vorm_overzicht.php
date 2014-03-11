@@ -13,8 +13,14 @@
 	$data["actie"] = $_GET["actie"];
 
 	//Als er geen formulier verstuurd is, dus geen zoekopdracht, herleiden naar het overzicht
-	if($data["actie"] == "zoeken" && !$_POST) {
-		header("Location: /automate/". $_GET["cat"] ."/overzicht/");
+	if($data["actie"] == "zoeken") {
+		if(!$_POST) {
+			header("Location: /automate/". $_GET["cat"] ."/overzicht/");
+		}
+		
+		$data["icoon"] = "search";
+	} else {
+		$data["icoon"] = "bars";
 	}
 	
 	//unset lege strings uit $_POST
