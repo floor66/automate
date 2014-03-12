@@ -36,7 +36,7 @@
 							<strong>Voornaam</strong><span class="verplicht">*</span>: <input type="text" class="form-control" required name="voornaam" />
 							<strong>Tussenvoegsel</strong>: <input type="text" class="form-control" name="tussenvoegsel" />
 							<strong>Achternaam</strong><span class="verplicht">*</span>: <input type="text" class="form-control" name="achternaam" />
-							<strong>Geslacht (m/v)</strong><span class="verplicht">*</span>: <input type="text" class="form-control" required name="geslacht" />
+							<strong>Geslacht</strong><span class="verplicht">*</span>: <select name="geslacht" class="form-control" required><option value="m">Man</option><option value="v">Vrouw</option></select>
 							<strong>Geboortedatum (DD-MM-JJJJ)</strong><span class="verplicht">*</span>: <input type="text" class="form-control" required name="geboortedatum" />
 							<strong>E-Mail</strong><span class="verplicht">*</span>: <input type="text" class="form-control" required name="email" />
 						</div>
@@ -49,10 +49,10 @@
 						</div>
 					</div>
 				</fieldset>
-				<input type="submit" class="form-control btn-primary submit" value="Aanmaken" name="nieuw" />
 			{else}
 			
 			{/if}
+				<input type="submit" class="form-control btn-primary submit" value="Aanmaken" name="nieuw" />
 			</form>
 		</div>
 	</div>

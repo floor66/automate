@@ -16,7 +16,7 @@
 		unset($_POST["nieuw"]);
 		$kolommen = implode(", ", array_keys($_POST));
 		$kolommen_ex = ":". implode(", :", array_keys($_POST));
-		
+
 		try {
 			$stmt = $pdo->prepare("INSERT INTO `". $data["categorie"] ."` (". $kolommen .") VALUES (". $kolommen_ex .")");
 			$stmt->execute($_POST);
